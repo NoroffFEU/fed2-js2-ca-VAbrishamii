@@ -5,4 +5,6 @@ export async function register({
   bio,
   banner,
   avatar,
-}) {}
+}) {
+  
+}
