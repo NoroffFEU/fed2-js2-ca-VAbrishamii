@@ -1,4 +1,4 @@
-import { API_AUTH_LOGIN } from "../constants";
+import  API_AUTH_LOGIN  from "../constants";
 
 export async function login({ email, password }) {
     const body = JSON.stringify({ email, password });

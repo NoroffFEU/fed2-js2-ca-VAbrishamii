@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap');
+
 * {
   &:before,
   &:after,
@@ -10,7 +12,6 @@ body {
   box-sizing: border-box;
   margin: 0;
 }
-
 a {
   color: #007bff; /* Initial link color */
   text-decoration: none;
@@ -89,10 +90,6 @@ p, .comment, .post {
 }
 
 
-/**
- * 1. Change the font styles in all browsers.
- * 2. Remove the margin in Firefox and Safari.
- */
 
 button,
 input,
@@ -106,9 +103,7 @@ textarea {
   color: inherit; /* Ensure text color is inherited */
 }
 
-/**
- * Remove the inner padding in Chrome and Safari on macOS.
- */
+
 
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
