@@ -27,8 +27,8 @@ export default class NoroffAPI{
           if (response.ok) {
             const { data } = await response.json();
             const { accessToken: token, ...user } = data;
-            localStorage.token = token;
-            localStorage.user = JSON.stringify(user);
+            localStorage.setItem("accessToken", token);
+            localStorage.setItem("user", JSON.stringify(user));
             router("/");
             return data;
           }

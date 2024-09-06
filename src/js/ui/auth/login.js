@@ -1,16 +1,25 @@
+ 
 import NoroffAPI from "../../api/index.js";
-const api = new NoroffAPI()
 
-export async function onLogin(event) {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData (form);
-    const data = Object.fromEntries(formData.entries());
+const noroffAPI = new NoroffAPI();
 
-    try{
-        await api.auth.login(data)
-        window.location.href = "/"
-    } catch (error){
-        alert(error);
-    }
-} 
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", onLogin);
+
+async function onLogin(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const userData = await noroffAPI.auth.login({ email, password });
+    alert("Login successful!");
+    console.log("User data:", userData);
+    window.location.href = "/"; 
+
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+}
