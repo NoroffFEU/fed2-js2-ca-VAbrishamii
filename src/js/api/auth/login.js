@@ -10,9 +10,13 @@ export async function login({ email, password }) {
     body,
   });
 
+  console.log("Response status:", response.status);
+
   if(response.ok) {
     const { data } = await response.json();
+    console.log("Response data:", data);//delete later!!
     const { accessToken: token, ...user } = data;
+    console.log("Access token:", token); //delete later!!
     localStorage.token = token;
     localStorage.user = JSON.stringify(user);
     window.location.href = "/post/index.html";
