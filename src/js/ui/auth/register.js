@@ -1,5 +1,5 @@
-import { register } from "../../api/auth.js";
-import { API_AUTH_REGISTER } from "../../settings/apis.js";
+import { register } from "../../api/auth/register.js";
+import { API_AUTH_REGISTER } from "../../api/constants.js";
 
 export async function onRegister(event) {
     event.preventDefault();
@@ -30,4 +30,4 @@ export async function onRegister(event) {
     alert(`${error.message}.\nPlease try again.`);
   }
 }
-}
+
