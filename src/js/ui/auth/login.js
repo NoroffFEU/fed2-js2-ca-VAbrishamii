@@ -1,4 +1,4 @@
-import { login } from "../../api/auth/login.js";
+import { login } from "../../api/instance.js";
 
 export async function onLogin(event) {
   event.preventDefault();
@@ -13,7 +13,7 @@ export async function onLogin(event) {
   passwordInput.value = "";
 
   try {
-    await login({ email, password });
+    await api.auth.login  ({ email, password });
   } catch(error) {
     alert(error.message);
   }

@@ -1,5 +1,4 @@
-import { register } from "../../api/auth/register.js";
-import { API_AUTH_REGISTER } from "../../api/constants.js";
+import api from "../../api/instance.js";
 
 export async function onRegister(event) {
     event.preventDefault();
@@ -23,7 +22,7 @@ export async function onRegister(event) {
   passwordInput.value = "";
 
   try {
-    await register(API_AUTH_REGISTER, user);
+    await api.auth.register({name, email, password});
     alert(`Registration successful!\nUsername: ${user.name}\nEmail: ${user.email}`);
     window.location.href = "/auth/login/";
   } catch(error) {
