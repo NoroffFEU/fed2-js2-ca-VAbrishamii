@@ -1,18 +1,18 @@
 import api from "../../api/instance.js";
 
 export async function onRegister(event) {
-    event.preventDefault();
+  event.preventDefault();
 
   const usernameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
 
-  let username = usernameInput.value;
+  let name = usernameInput.value;
   let email = emailInput.value;
   let password = passwordInput.value;
 
   const user = {
-    name : username,
+    name : name,
     email : email,
     password : password
   }
@@ -22,11 +22,12 @@ export async function onRegister(event) {
   passwordInput.value = "";
 
   try {
-    await api.auth.register({name, email, password});
-    alert(`Registration successful!\nUsername: ${user.name}\nEmail: ${user.email}`);
+    await api.auth.register({ name, email, password });
+    alert(
+      `Registration successful!\nUsername: ${user.name}\nEmail: ${user.email}`
+    );
     window.location.href = "/auth/login/";
-  } catch(error) {
+  } catch (error) {
     alert(`${error.message}.\nPlease try again.`);
   }
 }
-

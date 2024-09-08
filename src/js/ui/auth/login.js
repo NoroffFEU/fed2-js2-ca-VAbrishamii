@@ -1,4 +1,4 @@
-import { login } from "../../api/instance.js";
+import api from "../../api/instance.js";
 
 export async function onLogin(event) {
   event.preventDefault();

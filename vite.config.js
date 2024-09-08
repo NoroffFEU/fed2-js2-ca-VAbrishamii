@@ -16,6 +16,7 @@ export default defineConfig({
         post: resolve(__dirname, "./post/index.html"),
         editPost: resolve(__dirname, "./post/edit/index.html"),
         createPost: resolve(__dirname, "./post/create/index.html"),
+        feed: resolve(__dirname, "./post/feed/index.html"),
       },
     },
   },
