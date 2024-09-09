@@ -28,8 +28,12 @@ export default class NoroffAPI {
         console.log("Response data:", data); //delete later!!
         const { accessToken: token, ...user } = data;
         console.log("Access token:", token); //delete later!!
-        localStorage.token = token;
-        localStorage.user = JSON.stringify(user);
+
+        localStorage.setItem('accessToken', token);
+        console.log('Token:', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        // localStorage.token = token;
+        // localStorage.user = JSON.stringify(user);
         window.location.href = "/post/feed/";
         return data;
       }
