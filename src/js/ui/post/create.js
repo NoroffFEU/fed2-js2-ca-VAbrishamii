@@ -6,6 +6,7 @@ export async function onCreatePost(event) {
     const body = document.getElementById('body').value;
     const tags = document.getElementById('tags').value;
     const mediaUrl = document.getElementById('media').value;
+    const mediaAlt = document.getElementById('media').value;
     
     const tagArray = tags.split(',').map(tag => tag.trim());
     const media = mediaUrl ? { url: mediaUrl, alt: mediaAlt } : null;

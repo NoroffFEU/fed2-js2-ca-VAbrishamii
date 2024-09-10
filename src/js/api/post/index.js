@@ -34,7 +34,7 @@ export default class PostAPI {
 
         if (response.ok) {
           const data = await response.json();
-       
+
           console.log("Post creation successful. Response data:", data);
           return data;
         } else {
@@ -59,61 +59,68 @@ export default class PostAPI {
         method: "GET",
         headers: headers(),
       });
-     
+
       if (response.ok) {
         const { data } = await response.json();
-        console.log('Data:', data);
+        console.log("Data:", data);
         return data;
-      } else{
-      console.log('failed', response.status);
-      const errorData = await response.json();
-      throw new Error(errorData.errors[0]?.message || "Could not fetch post");
+      } else {
+        console.log("failed", response.status);
+        const errorData = await response.json();
+        throw new Error(errorData.errors[0]?.message || "Could not fetch post");
       }
-  },
+    },
 
     update: async (postId, updatedData) => {
       const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) {
-    throw new Error("User must be logged in to update posts.");
-  }
+      if (!user) {
+        throw new Error("User must be logged in to update posts.");
+      }
 
-  try {
+      try {
+        const existingPost = await fetch(
+          `${this.apiReadPosts.replace("id", postId)}`,
+          {
+            method: "GET",
+            headers: headers(),
+          }
+        );
 
-    const existingPost = await fetch(`${this.apiReadPosts.replace('id', postId)}`, {
-      method: "GET",
-      headers: headers(),
-    });
+        if (!existingPost.ok) {
+          throw new Error("Post not found.");
+        }
 
-    if (!existingPost.ok) {
-      throw new Error("Post not found.");
-    }
+        const post = await existingPost.json();
 
-    const post = await existingPost.json();
+        if (post.userId !== user.id) {
+          throw new Error("You are not authorized to update this post.");
+        }
 
-    if (post.userId !== user.id) {
-      throw new Error("You are not authorized to update this post.");
-    }
+        const response = await fetch(
+          `${this.apiUpdatePosts.replace("id", postId)}`,
+          {
+            method: "PUT",
+            headers: headers(),
+            body: JSON.stringify(updatedData),
+          }
+        );
 
-    const response = await fetch(`${this.apiUpdatePosts.replace('id', postId)}`, {
-      method: "PUT", 
-      headers: headers(),
-      body: JSON.stringify(updatedData),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Post updated successfully:", data);
-      return data;
-    } else {
-      const errorData = await response.json();
-      throw new Error(errorData.errors[0]?.message || "Could not update post");
-    }
-  } catch (error) {
-    console.error("Error updating post:", error.message);
-    throw error;
-  }
-},
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Post updated successfully:", data);
+          return data;
+        } else {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.errors[0]?.message || "Could not update post"
+          );
+        }
+      } catch (error) {
+        console.error("Error updating post:", error.message);
+        throw error;
+      }
+    },
 
     delete: async (postId) => {
       const response = await fetch(`${this.apiPosts}/${postId}`, {
