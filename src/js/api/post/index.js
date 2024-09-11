@@ -71,6 +71,29 @@ export default class PostAPI {
       }
     },
 
+    readSinglePost: async (postId) => {
+      try {
+        const response = await fetch(`${this.apiReadPosts}/${postId}`, {
+          method: "GET",
+          headers: headers(),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Post data:", data);
+          return data;
+        } else {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.errors[0]?.message || "Could not fetch post"
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching post:", error.message);
+        throw error;
+      }
+    },
+
     update: async (postId, updatedData) => {
       const user = JSON.parse(localStorage.getItem("user"));
 
