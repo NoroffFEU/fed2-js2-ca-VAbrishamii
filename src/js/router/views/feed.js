@@ -4,6 +4,7 @@
 // logoutButton.addEventListener("click", onLogout);
 
 import { postAPI } from "../../api/instance";
+import { createPostHTML } from '../../ui/post/displayPost'; 
 
 function displayLoggedInUser() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -22,13 +23,14 @@ function displayLoggedInUser() {
 
 displayLoggedInUser();
 
-let currentPage = 1;
-const postsPerPage = 12;
 
 export function handlePostClick(postId) {
   window.location.href = `/post/index.html?id=${postId}`;
 }
 window.handlePostClick = handlePostClick;
+
+let currentPage = 1;
+const postsPerPage = 12;
 
 async function fetchAllPosts() {
   try {
@@ -43,51 +45,13 @@ async function fetchAllPosts() {
     const paginatedPosts = posts.slice(startIndex, endIndex);
 
     const postContainer = document.querySelector(".feed-container");
-    postContainer.innerHTML = "";
+    postContainer.innerHTML = ""; 
 
-    paginatedPosts.forEach((post) => {
-      const postElement = document.createElement("div");
-      postElement.className = "post";
-      postElement.dataset.postId = post.id;
-
-      // Generate comments and reactions
-      const commentsHTML = post.comments
-        ? post.comments
-            .map((comment) => `<p class="post-comment">${comment}</p>`)
-            .join("")
-        : "";
-      const reactionsHTML = post.reactions
-        ? post.reactions
-            .map((reaction) => `<span class="post-reaction">${reaction}</span>`)
-            .join("")
-        : "";
-
-      postElement.innerHTML = `
-      <a href="#" onclick="handlePostClick(${post.id})">
-          <h3>${post.title}</h3>
-        </a>
-        <p>${post.body}</p>
-        ${
-          post.media
-            ? `<img src="${post.media.url}" alt="${post.media.alt}" />`
-            : ""
-        }
-        <div class="tags">${post.tags
-          .map((tag) => `<span>${tag}</span>`)
-          .join("")}</div>
-        <div class="post-comments">
-          <h4>Comments:</h4>
-          ${commentsHTML}
-        </div>
-        <div class="post-reactions">
-          <h4>Reactions:</h4>
-          ${reactionsHTML}
-        </div>
-      `;
+    paginatedPosts.forEach(post => {
+      const postElement = createPostHTML(post);
       postContainer.appendChild(postElement);
     });
 
-    // Handle pagination
     handlePagination(totalPosts);
   } catch (error) {
     console.error("Failed to fetch posts:", error);
@@ -111,7 +75,5 @@ function handlePagination(totalPosts) {
     paginationContainer.appendChild(pageButton);
   }
 }
-
-
 
 fetchAllPosts();

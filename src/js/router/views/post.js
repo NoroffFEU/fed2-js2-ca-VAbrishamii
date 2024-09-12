@@ -1,15 +1,14 @@
-
-
-import { postAPI } from "../../api/instance"; 
-import { createPostHTML } from "../../ui/post/display"; 
+import { postAPI } from "../../api/instance";
+import { createSinglePostHTML } from "../../ui/post/displaySinglePost";
 
 async function fetchPostById(postId) {
   try {
     const post = await postAPI.post.readSinglePost(postId);
+    console.log('Post:', post);
     const postContainer = document.getElementById("post-container");
     postContainer.innerHTML = "";
 
-    const postHTML = createPostHTML(post);
+    const postHTML = createSinglePostHTML(post);
     postContainer.appendChild(postHTML);
   } catch (error) {
     console.error("Failed to fetch post:", error);
@@ -27,3 +26,4 @@ if (postId) {
 } else {
   console.error("No post ID found in URL");
 }
+
