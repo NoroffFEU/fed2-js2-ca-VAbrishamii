@@ -1,5 +1,8 @@
 import { postAPI } from "../../api/instance";
+import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { createSinglePostHTML } from "../../ui/post/displaySinglePost";
+
+displayLoggedInUser();
 
 async function fetchPostById(postId) {
   try {

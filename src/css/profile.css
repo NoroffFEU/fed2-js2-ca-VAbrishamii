@@ -1,0 +1,43 @@
+/* Profile link */
+.profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit; 
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+ 
+  .User-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-right: 10px; 
+    border: 2px solid #ccc; 
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .profile-link:hover .User-avatar {
+    transform: scale(1.1); 
+  }
+  
+
+  .User-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333; 
+    font-family: 'Arial', sans-serif;
+    transition: color 0.3s ease;
+  }
+ 
+  .profile-link:hover .User-name {
+    color: #007bff; 
+  }
+  

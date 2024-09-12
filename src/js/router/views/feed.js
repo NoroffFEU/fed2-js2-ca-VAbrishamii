@@ -4,24 +4,8 @@
 // logoutButton.addEventListener("click", onLogout);
 
 import { postAPI } from "../../api/instance";
+import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { createPostHTML } from '../../ui/post/displayPost'; 
-
-function displayLoggedInUser() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
-
-  if (user) {
-    const userNameElement = document.querySelector(".User-name");
-    if (userNameElement) {
-      userNameElement.textContent = user.name;
-      userNameElement.href = `/profile/index.html?user=${user.name}`; 
-    }
-  } else {
-    window.location.href = "/auth/login/";
-  }
-}
-
-displayLoggedInUser();
 
 
 export function handlePostClick(postId) {
@@ -76,4 +60,5 @@ function handlePagination(totalPosts) {
   }
 }
 
+displayLoggedInUser();
 fetchAllPosts();

@@ -31,15 +31,6 @@ a::after {
   transition: width 0.3s ease, left 0.3s ease; /* Smooth animation */
 }
 
-/* a:hover {
-  color: #0056b3; 
-}
-
-a:hover::after {
-  width: 100%; 
-  left: 0; 
-} */
-
 /* Button base styles */
 .btn {
   display: inline-block;
@@ -107,12 +98,6 @@ textarea {
   color: inherit; /* Ensure text color is inherited */
 }
 
-/* .logo {
-  width: 180px;
-  height: 50px;
-  display: block;
-
-} */
 nav {
   width: 90%;
   display: flex;
@@ -127,30 +112,6 @@ nav {
   margin-right: 10px;
 }
 
-.profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.profile-link {
-  display: inline-block;
-  width: 50px; /* Adjust width and height to match the size you want */
-  height: 50px;
-  border-radius: 50%; /* This creates the circle */
-  border: 2px solid #c9184a;
-  text-align: center; /* Center text horizontally */
-  line-height: 100px; /* Match the height to center text vertically */
-  text-decoration: none; /* Remove underline from link */
-  color: black; /* Text color */
-  font-size: 12px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center; /* Center text horizontally */
-  align-items: center; 
-  /* transition: background-color 0.3s ease;  */
-}
 
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
