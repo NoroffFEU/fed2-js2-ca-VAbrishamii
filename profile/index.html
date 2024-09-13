@@ -1,18 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <h1>Profile</h1>
+    <header>
+      <nav>
+        <div class="menu">
+          <a href="/post/feed/"><i class="fa-solid fa-house"></i></a>
+          <a href="/post/create/"><i class="fa-solid fa-plus"></i></a>
+          <a href="/post/edit/"><i class="fa-regular fa-pen-to-square"></i></a>
+        </div>
+        <form name="updateProfile">
+          <button>Update Profile</button>
+          <button class="Logout-button">Logout</button>
+        </form>
+        <div class="profile-container"></div>
+      </nav>
+    </header>
 
-    <form name="updateProfile">
-      <button>Update Profile</button>
-      <button class="Logout-button">Logout</button>
-    </form>
+    <main>
+      <div class="dashboard-container"></div>
+    </main>
   </body>
 </html>

@@ -13,10 +13,10 @@ body {
   margin: 0;
 }
 a {
-  color: #c9184a; /* Initial link color */
+  color: #c9184a; 
   text-decoration: none;
-  position: relative; /* Required for the pseudo-element */
-  transition: color 0.3s ease; /* Smooth color transition */
+  position: relative; 
+  transition: color 0.3s ease; 
   cursor: pointer;
 }
 
@@ -25,10 +25,10 @@ a::after {
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -2px; /* Position the line just below the text */
+  bottom: -2px; 
   left: 50%;
-  background-color: #c9184a; /* Underline color */
-  transition: width 0.3s ease, left 0.3s ease; /* Smooth animation */
+  background-color: #c9184a;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 /* Button base styles */
@@ -98,19 +98,7 @@ textarea {
   color: inherit; /* Ensure text color is inherited */
 }
 
-nav {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-  margin: 5px auto;
-}
-.menu i {
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-right: 10px;
-}
+
 
 
 [type="search"]::-webkit-search-decoration {
