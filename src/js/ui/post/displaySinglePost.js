@@ -1,3 +1,4 @@
+
 export function createSinglePostHTML(post) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post");
@@ -22,6 +23,7 @@ export function createSinglePostHTML(post) {
     imgElement.alt = post.data.alt || "Post Image";
     postContainer.appendChild(imgElement);
   }
+
   // Tags
   if (post.tags && post.tags.length > 0) {
     const tagsContainer = document.createElement("div");
@@ -33,42 +35,55 @@ export function createSinglePostHTML(post) {
     post.tags.forEach((tag) => {
       const tagElement = document.createElement("span");
       tagElement.classList.add("post-tag");
-      tagElement.textContent = data.tag;
+      tagElement.textContent = tag; 
       tagsContainer.appendChild(tagElement);
     });
     postContainer.appendChild(tagsContainer);
   }
 
-  // Comments
+  // Comments Section
   const commentsContainer = document.createElement("div");
   commentsContainer.classList.add("post-comments");
-  const commentsTitle = document.createElement("h3");
-  commentsTitle.textContent = "Comments";
+
+  const commentsTitle = document.createElement("div");
+  commentsTitle.classList.add("comments-title");
+
+  // Comment Icon
+  const commentIcon = document.createElement("i");
+  commentIcon.classList.add("fas", "fa-comments"); // Font Awesome comment icon
+  commentsTitle.appendChild(commentIcon);
+
+  // Comment Count
+  const commentCount = document.createElement("span");
+  commentCount.textContent = ` ${post.data._count.comments || 0} `;
+  commentsTitle.appendChild(commentCount);
+
   commentsContainer.appendChild(commentsTitle);
-
-  // Handle case where comments count might be zero
-  const noCommentsElement = document.createElement("p");
-  noCommentsElement.textContent = `(${post.data._count.comments})`;
-  commentsContainer.appendChild(noCommentsElement);
-
   postContainer.appendChild(commentsContainer);
 
-  // Reactions
+  // Reactions Section
   const reactionsContainer = document.createElement("div");
   reactionsContainer.classList.add("post-reactions");
-  const reactionsTitle = document.createElement("h3");
-  reactionsTitle.textContent = "Reactions";
+
+  const reactionsTitle = document.createElement("div");
+  reactionsTitle.classList.add("reactions-title");
+
+  // Reaction Icon
+  const reactionIcon = document.createElement("i");
+  reactionIcon.classList.add("fas", "fa-heart"); 
+  reactionsTitle.appendChild(reactionIcon);
+
+  // Reaction Count
+  const reactionCount = document.createElement("span");
+  reactionCount.textContent = ` ${post.data._count.reactions || 0} `;
+  reactionsTitle.appendChild(reactionCount);
+
   reactionsContainer.appendChild(reactionsTitle);
-
-  // Handle case where reactions count might be zero
-  const noReactionsElement = document.createElement("p");
-  noReactionsElement.textContent = `(${post.data._count.reactions})`;
-  reactionsContainer.appendChild(noReactionsElement);
-
   postContainer.appendChild(reactionsContainer);
 
   return postContainer;
 }
+
 
 export function displaySinglePosts(posts) {
   const postContainer = document.querySelector(".post-container");
