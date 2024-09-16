@@ -25,17 +25,24 @@ async function readPostsByUser() {
         // Edit Icon
         const editIcon = document.createElement('i');
         editIcon.classList.add('fas', 'fa-edit'); 
-        editIcon.addEventListener('click', () => {
+        editIcon.addEventListener('click', (event) => {
+          event.preventDefault();
           window.location.href = `/post/edit/?id=${post.id}`; 
         });
         actionsContainer.appendChild(editIcon);
         // Delete Icon
         const deleteIcon = document.createElement('i');
         deleteIcon.classList.add('fas', 'fa-trash');
-        deleteIcon.addEventListener('click', async () => {
+        deleteIcon.addEventListener('click', async (event) => {
+          event.preventDefault();
           if (confirm('Are you sure you want to delete this post?')) {
-            await postAPI.post.delete(post.id); 
-            location.reload(); 
+            try {
+              await postAPI.post.delete(post.id);
+              location.reload();
+            } catch (error) {
+              console.error("Error deleting post:", error);
+              alert('Could not delete post. Please try again.');
+            }
           }
         });
         actionsContainer.appendChild(deleteIcon);

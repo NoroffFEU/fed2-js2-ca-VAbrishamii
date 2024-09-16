@@ -146,17 +146,23 @@ export default class PostAPI {
     },
 
     delete: async (postId) => {
-      const response = await fetch(`${this.apiPosts}/${postId}`, {
-        method: "DELETE",
-        headers: headers(),
-      });
-
-      if (response.ok) {
-        return true;
+      try {
+        const response = await fetch(`${this.apiDeletePosts.replace("id", postId)}`, {
+          method: "DELETE",
+          headers: headers(),
+        });
+    
+        if (response.ok) {
+          console.log(`Post ${postId} deleted successfully`);
+          return true;
+        }
+    
+        const errorData = await response.json();
+        throw new Error(errorData.errors[0]?.message || "Could not delete post");
+      } catch (error) {
+        console.error("Error deleting post:", error.message);
+        throw error;
       }
-
-      const errorData = await response.json();
-      throw new Error(errorData.errors[0]?.message || "Could not delete post");
     },
   };
 }
