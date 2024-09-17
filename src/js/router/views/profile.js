@@ -1,3 +1,4 @@
+
 import { onLogout } from "../../ui/auth/logout";
 import { postAPI, profileAPI } from "../../api/instance";
 import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
@@ -55,4 +56,5 @@ async function readPostsByUser() {
   }
   
   readPostsByUser();
+
   

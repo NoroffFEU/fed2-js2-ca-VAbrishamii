@@ -10,26 +10,38 @@
       integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/css/style.css" />
     <script type="module" src="/src/app.js"></script>
   </head>
 
   <body>
     <header>
-      <nav>
+      <nav class="nav-container">
         <div class="logo">
           <img src="/images/noroff-logo.png" alt="Noroff Logo" />
         </div>
       </nav>
     </header>
 
-    <main>
-      <a href="/profile/">My Profile</a>
+    <main class="welcome-page">
+      <section class="welcome-section">
+        <h1>welcom to Noroff media</h1>
+      </section>
+      <div class="auth-buttons">
+        <a href="/profile/" class="btn profile-btn">My Profile</a>
+        <a href="/auth/login/" class="btn login-btn">Login</a>
+        <a href="/auth/register/" class="btn register-btn">Register</a>
+        <button class="btn logout-btn">Logout</button>
+      </div>
+      <!-- <a href="/profile/">My Profile</a>
       <a href="/auth/login/">Login</a>
       <a href="/auth/register/">Register</a>
-      <button class="btn">Logout</button>
+      <button class="btn">Logout</button> -->
     </main>
-    <footer>
+    <footer class="footer">
       <p>&copy; 2024 Noroff</p>
     </footer>
   </body>

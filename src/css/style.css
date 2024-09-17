@@ -1,7 +1,10 @@
-@import url(/src/css/_reset.css);
-@import url(/src/css/navbar.css);
-@import url(/src/css/feed.css);
-@import url(/src/css/profile.css);
+@import url(./_reset.css);
+@import url(./navbar.css);
+@import url(./feed.css);
+@import url(./profile.css);
+@import url(./welcomepage.css);
+@import url(./footer.css);
+@import url(./authform.css);
 
 
 
