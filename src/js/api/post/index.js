@@ -100,50 +100,74 @@ export default class PostAPI {
       if (!user) {
         throw new Error("User must be logged in to update posts.");
       }
-
       try {
-        const existingPost = await fetch(
-          `${this.apiReadPosts.replace("id", postId)}`,
-          {
-            method: "GET",
-            headers: headers(),
-          }
+      const response = await fetch(`${this.apiUpdatePosts.replace('id', postId)}`, {
+        method: "PUT",
+        headers: headers(),
+        body: JSON.stringify(updatedData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Post updated successfully:", data);
+        return data;
+      } else {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.errors[0]?.message || "Could not update post"
         );
-
-        if (!existingPost.ok) {
-          throw new Error("Post not found.");
-        }
-
-        const post = await existingPost.json();
-
-        if (post.userId !== user.id) {
-          throw new Error("You are not authorized to update this post.");
-        }
-
-        const response = await fetch(
-          `${this.apiUpdatePosts.replace("id", postId)}`,
-          {
-            method: "PUT",
-            headers: headers(),
-            body: JSON.stringify(updatedData),
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log("Post updated successfully:", data);
-          return data;
-        } else {
-          const errorData = await response.json();
-          throw new Error(
-            errorData.errors[0]?.message || "Could not update post"
-          );
-        }
-      } catch (error) {
-        console.error("Error updating post:", error.message);
-        throw error;
       }
-    },
+    } catch (error) {
+      console.error("Error updating post:", error.message);
+      throw error;
+    }
+  },
+
+  
+
+    //   try {
+    //     const existingPost = await fetch(
+    //       `${this.apiReadPosts.replace("id", postId)}`,
+    //       {
+    //         method: "GET",
+    //         headers: headers(),
+    //       }
+    //     );
+
+    //     if (!existingPost.ok) {
+    //       throw new Error("Post not found.");
+    //     }
+
+    //     const post = await existingPost.json();
+
+    //     if (post.userId !== user.id) {
+    //       throw new Error("You are not authorized to update this post.");
+    //     }
+
+    //     const response = await fetch(
+    //       `${this.apiUpdatePosts.replace("id", postId)}`,
+    //       {
+    //         method: "PUT",
+    //         headers: headers(),
+    //         body: JSON.stringify(updatedData),
+    //       }
+    //     );
+
+    //     if (response.ok) {
+    //       const data = await response.json();
+    //       console.log("Post updated successfully:", data);
+    //       return data;
+    //     } else {
+    //       const errorData = await response.json();
+    //       throw new Error(
+    //         errorData.errors[0]?.message || "Could not update post"
+    //       );
+    //     }
+    //   } catch (error) {
+    //     console.error("Error updating post:", error.message);
+    //     throw error;
+    //   }
+    // },
 
     delete: async (postId) => {
       try {
