@@ -1,4 +1,4 @@
-/* Profile link */
+
 .profile-link {
     display: flex;
     align-items: center;
@@ -6,6 +6,7 @@
     color: inherit; 
     padding: 10px;
     transition: background-color 0.3s ease;
+  
   }
   
   .profile {
@@ -40,4 +41,25 @@
   .profile-link:hover .User-name {
     color: #007bff; 
   }
+  .dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
   
+  }
+
+  .comments-title i {
+    color: #333;
+  }
+  .reactions-title i {
+   color: red;
+  }
+  .post-actions i{
+    margin-top: 10px;
+    color: #333;
+  }
+  .post-actions{
+    position: absolute;
+  }

@@ -23,7 +23,6 @@ async function readPostsByUser() {
 
         const actionsContainer = document.createElement('div');
         actionsContainer.classList.add('post-actions');
-        // Edit Icon
         const editIcon = document.createElement('i');
         editIcon.classList.add('fas', 'fa-edit'); 
         editIcon.addEventListener('click', (event) => {
@@ -31,7 +30,7 @@ async function readPostsByUser() {
           window.location.href = `/post/edit/?id=${post.id}`; 
         });
         actionsContainer.appendChild(editIcon);
-        // Delete Icon
+      
         const deleteIcon = document.createElement('i');
         deleteIcon.classList.add('fas', 'fa-trash');
         deleteIcon.addEventListener('click', async (event) => {

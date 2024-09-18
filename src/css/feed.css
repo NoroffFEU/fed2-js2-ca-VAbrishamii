@@ -1,6 +1,4 @@
-/* styles.css */
 
-/* Container for the feed */
 .feed-container {
     display: flex;
     flex-wrap: wrap;
@@ -8,23 +6,25 @@
     justify-content: center;
     padding: 20px;
   }
-  
-  /* Each post container */
+  .post-link {
+    position: relative;
+  }
   .post {
-    width: 300px; /* Fixed width for thumbnail-like appearance */
+    width: 300px; 
     border: 1px solid #ddd;
     border-radius: 8px;
-    overflow: hidden; /* Ensures no content overflows */
+    overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    position: relative;
+    
   }
   
   .post:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
-  /* Thumbnail image styling */
+
   .post img {
     width: 100%;
     height: 200px;
@@ -32,7 +32,7 @@
 
   }
   
-  /* Post content styling */
+
   .post p {
     padding: 16px;
   }
@@ -50,7 +50,7 @@
     display: hidden;
   }
   
-  /* Comments and reactions sections */
+
   .post-comments,
   .post-reactions {
     margin-top: 10px;

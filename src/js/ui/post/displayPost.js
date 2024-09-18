@@ -3,7 +3,7 @@ export function createPostHTML(post) {
   const postContainer = document.createElement('div');
   postContainer.classList.add('post');
 
-  const titleElement = document.createElement('h2');
+  const titleElement = document.createElement('h1');
   titleElement.classList.add('post-title');
   titleElement.textContent = post.title;
   postContainer.appendChild(titleElement);

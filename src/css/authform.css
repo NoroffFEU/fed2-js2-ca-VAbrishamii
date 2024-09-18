@@ -5,30 +5,35 @@ h1 {
     margin-bottom: 1.5rem;
   }
   
-  form {
+  .login-form, .register-form {
     background-color: #fff;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
-    margin: 0 auto;
-
-  }
-  
-  form div {
+    margin: 4rem auto;
     margin-bottom: 1.5rem;
+
+  } 
+  .login-form, .register-form button{
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    margin: 1rem auto;
   }
+
   
   label {
     font-size: 1rem;
     color: #333;
     display: block;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
   }
   
   input[type="email"],
-  input[type="password"] {
+  input[type="password"],
+  input[type="text"] {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ccc;
@@ -44,7 +49,7 @@ h1 {
   }
   
   button {
-    width: 100%;
+    /* width: 100%; */
     padding: 0.75rem;
     font-size: 1.1rem;
     border: none;
@@ -58,7 +63,7 @@ h1 {
   .login-btn {
     background-color: #007bff;
     color: white;
-    margin-bottom: 1rem;
+    /* margin: 1rem auto */
   }
   
   .login-btn:hover {
@@ -68,6 +73,7 @@ h1 {
   .register-btn {
    background-color: #2631ad;
     color: white;
+    /* margin: 0 auto; */
   }
   
   .register-btn:hover {
