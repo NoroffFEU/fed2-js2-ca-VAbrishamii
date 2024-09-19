@@ -1,12 +1,48 @@
 
-export function createPostHTML(post) {
+export function createPostHTML(post, isOwner) {
   const postContainer = document.createElement('div');
   postContainer.classList.add('post');
+
+  // if (isOwner) {
+  //   const actionsContainer = document.createElement('div');
+  //   actionsContainer.classList.add('post-actions');
+
+  //   // Edit icon
+  //   const editIcon = document.createElement('i');
+  //   editIcon.classList.add('fas', 'fa-edit', 'edit-icon');
+  //   editIcon.title = "Edit Post";
+  //   editIcon.addEventListener('click', () => {
+  //     window.location.href = `/edit-post/?id=${post.id}`;
+  //   });
+
+  //   // Delete icon
+  //   const deleteIcon = document.createElement('i');
+  //   deleteIcon.classList.add('fas', 'fa-trash', 'delete-icon');
+  //   deleteIcon.title = "Delete Post";
+  //   deleteIcon.addEventListener('click', async (event) => {
+  //     event.preventDefault();
+  //     if (confirm("Are you sure you want to delete this post?")) {
+  //       try {
+  //         await postAPI.post.delete(post.id);
+  //         location.reload();
+  //       } catch (error) {
+  //         console.error("Error deleting post:", error);
+  //         alert('Could not delete post. Please try again.');
+  //       }
+  //     }
+    
+  //   });
+
+  //   actionsContainer.appendChild(editIcon);
+  //   actionsContainer.appendChild(deleteIcon);
+  //   postContainer.appendChild(actionsContainer);
+  // }
 
   const titleElement = document.createElement('h1');
   titleElement.classList.add('post-title');
   titleElement.textContent = post.title;
   postContainer.appendChild(titleElement);
+
 
   if (post.media && post.media.url) {
     const imgElement = document.createElement('img');
@@ -18,8 +54,11 @@ export function createPostHTML(post) {
 
   const captionElement = document.createElement('p');
   captionElement.classList.add('post-caption');
-  captionElement.textContent = post.caption;
+  captionElement.textContent = post.body;
   postContainer.appendChild(captionElement);
+
+  const interactionsContainer = document.createElement('div');
+  interactionsContainer.classList.add('post-interactions');
 
   const commentsContainer = document.createElement('div');
   commentsContainer.classList.add('post-comments');
@@ -49,7 +88,6 @@ export function createPostHTML(post) {
     noCommentsElement.textContent = "";
     commentsContainer.appendChild(noCommentsElement);
   }
-  postContainer.appendChild(commentsContainer);
 
   const reactionsContainer = document.createElement('div');
   reactionsContainer.classList.add('post-reactions');
@@ -58,7 +96,7 @@ export function createPostHTML(post) {
   reactionsTitle.classList.add('reactions-title');
 
   const reactionIcon = document.createElement('i');
-  reactionIcon.classList.add('fas', 'fa-heart'); // Font Awesome heart icon for reactions
+  reactionIcon.classList.add('fas', 'fa-heart'); 
   reactionsTitle.appendChild(reactionIcon);
 
   const reactionCount = document.createElement('span');
@@ -79,7 +117,16 @@ export function createPostHTML(post) {
     noReactionsElement.textContent = "";
     reactionsContainer.appendChild(noReactionsElement);
   }
-  postContainer.appendChild(reactionsContainer);
+
+  interactionsContainer.appendChild(commentsContainer);
+  interactionsContainer.appendChild(reactionsContainer);
+
+  postContainer.appendChild(interactionsContainer);
+
+  const dateElement = document.createElement('p');
+  dateElement.classList.add('post-date');
+  dateElement.textContent = `Published on: ${new Date(post.created).toLocaleDateString()}`;
+  postContainer.appendChild(dateElement);
 
   const postLink = document.createElement('a');
   postLink.href = `/post/?id=${post.id}`;

@@ -11,6 +11,7 @@
   }
   .post {
     width: 300px; 
+    min-height: 400px;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -18,6 +19,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
     
   }
   
@@ -49,33 +52,45 @@
     margin: 0;
     display: hidden;
   }
+  .post-interactions {
+    flex: 1;
+    display: flex;
+    padding-left: 10px;
+  }
   
-
-  .post-comments,
-  .post-reactions {
+  .post-comments, .post-reactions {
+    display: flex;
+    align-items: center; 
     margin-top: 10px;
+    margin: 0; 
   }
   
-  .post-comment,
-  .post-reaction {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.875rem;
+  .comments-title, .reactions-title {
+    display: flex;
+    align-items: center; 
+    margin-right: 16px; 
   }
   
+  .comments-title i, .reactions-title i {
+    margin-right: 4px; 
+  }
  
   .pagination {
     margin-top: 20px;
     text-align: center;
   }
-  
+  .post-date{
+    color: #807d7d;
+  }
   .page-button {
     margin: 0 5px;
-    padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #808285;
     color: #fff;
-    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 0.875rem;
   }
@@ -84,5 +99,11 @@
     background-color: #0056b3;
   }
   
+  #post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
 
 

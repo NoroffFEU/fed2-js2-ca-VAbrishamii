@@ -16,7 +16,13 @@ h1 {
     margin-bottom: 1.5rem;
 
   } 
-  .login-form, .register-form button{
+  .login-form button{
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    margin: 1rem auto;
+  }
+  .register-form button{
     display: flex;
     justify-content: center;
     width: 40%;
@@ -60,10 +66,10 @@ h1 {
 
   }
   
-  .login-btn {
+  /* .login-btn {
     background-color: #007bff;
     color: white;
-    /* margin: 1rem auto */
+    
   }
   
   .login-btn:hover {
@@ -73,12 +79,12 @@ h1 {
   .register-btn {
    background-color: #2631ad;
     color: white;
-    /* margin: 0 auto; */
+   
   }
   
   .register-btn:hover {
     background-color: #218838;
-  }
+  } */
   
   .btn a {
     text-decoration: none;
