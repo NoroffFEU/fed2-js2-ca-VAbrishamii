@@ -1,70 +1,17 @@
-/* 
+.profile-container {
+  display: flex;
+  padding: 20px;
+
+
+  
+}
 .profile-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit; 
-    padding: 10px;
-    transition: background-color 0.3s ease;
-  
-  }
-  
-  .profile {
-    display: flex;
-    align-items: center;
-  }
- 
-  .User-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; 
-    object-fit: cover; 
-    margin-right: 10px; 
-    border: 2px solid #ccc; 
-    transition: transform 0.3s ease;
-  }
-  
-  
-  .profile-link:hover .User-avatar {
-    transform: scale(1.1); 
-  }
-  
-
-  .User-name {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #333; 
-    font-family: 'Arial', sans-serif;
-    transition: color 0.3s ease;
-  }
- 
-  .profile-link:hover .User-name {
-    color: #007bff; 
-  }
-  .dashboard-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-  
-  }
-
-  .comments-title i {
-    color: #333;
-  }
-  .reactions-title i {
-   color: red;
-  }
-  .post-actions i{
-    margin-top: 10px;
-    color: #333;
-  }
-  .post-actions{
-    position: absolute;
-  } */
-
-  /* Profile dropdown menu */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative; 
+  margin-left: auto;
+}
 .profile {
   position: relative;
   display: inline-block;
@@ -111,4 +58,21 @@
 
 .dropdown-menu li a:hover {
   color: #007bff;
+}
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 50px;
+  margin: 0 auto;
+
+}
+.post-actions {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  display: flex;
+  gap: 10px;
+  color: #4f4e4e;
+  margin-bottom: 5px;
 }

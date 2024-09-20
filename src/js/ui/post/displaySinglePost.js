@@ -3,15 +3,12 @@ export function createSinglePostHTML(post) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post");
 
-  const titleElement = document.createElement("h2");
+  const titleElement = document.createElement("h1");
   titleElement.classList.add("post-title");
   titleElement.textContent = post.data.title;
   postContainer.appendChild(titleElement);
 
-  const bodyElement = document.createElement("p");
-  bodyElement.classList.add("post-body");
-  bodyElement.textContent = post.data.body;
-  postContainer.appendChild(bodyElement);
+  
 
   if (post.data.media && post.data.media.url) {
     const imgElement = document.createElement("img");
@@ -36,6 +33,10 @@ export function createSinglePostHTML(post) {
     });
     postContainer.appendChild(tagsContainer);
   }
+  const bodyElement = document.createElement("p");
+  bodyElement.classList.add("post-body");
+  bodyElement.textContent = post.data.body;
+  postContainer.appendChild(bodyElement);
 
   const interactionsContainer = document.createElement("div");
   interactionsContainer.classList.add("post-interactions");
