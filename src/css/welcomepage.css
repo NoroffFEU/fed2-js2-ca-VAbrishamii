@@ -1,17 +1,10 @@
-/* .nav-container {
-  display: flex;
-  justify-content: center;
-  margin-left: 2rem;
-  padding-top: 8rem;
-}
-.logo img {
-  width: 200px;
-} */
+
 .welcome-page {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100vh;
 }
 
 .welcome-section {

@@ -3,9 +3,11 @@ import { headers } from "../headers";
 
 export default class ProfileAPI {
   apiBase = "";
+  allprofile = "";
 
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
+    this.allprofile = `${this.apiBase}/social/profiles`;
   }
 
   getUserName() {
@@ -66,5 +68,26 @@ export default class ProfileAPI {
         errorData.errors[0]?.message || "Could not read posts by this user";
       throw new Error(errorMessage);
     },
+
+    allProfiles: async () => {
+      const response = await fetch(this.allprofile, {
+        method: "GET",
+        headers: headers(),
+      });
+      console.log('profile', response);
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      const errorData = await response.json();
+      const errorMessage =
+        errorData.errors[0]?.message || "Could not read all profiles";
+      throw new Error(errorMessage);
+
+    }
+
   };
+  
 }

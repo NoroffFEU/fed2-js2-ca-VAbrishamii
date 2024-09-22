@@ -6,6 +6,7 @@
 import { postAPI } from "../../api/instance";
 import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { createPostHTML } from '../../ui/post/displayPost'; 
+import { AllProfiles } from "../../ui/profile/allprofiles";
 
 
 export function handlePostClick(postId) {
@@ -19,7 +20,7 @@ const postsPerPage = 12;
 async function fetchAllPosts() {
   try {
     const response = await postAPI.post.read();
-    console.log("Posts:", response);
+    // console.log("Posts:", response);
     const posts = response || [];
 
     // Implement pagination
@@ -60,5 +61,6 @@ function handlePagination(totalPosts) {
   }
 }
 
+AllProfiles();
 displayLoggedInUser();
 fetchAllPosts();
