@@ -76,6 +76,7 @@ export default class ProfileAPI {
     // },
     readPosts: async (username) => {
       const url = this.getPostsByUserURL(username || this.getUserName());
+      console.log('url', url);
       const response = await fetch(url, {
         method: "GET",
         headers: headers(),
@@ -83,6 +84,7 @@ export default class ProfileAPI {
 
       if (response.ok) {
         const { data } = await response.json();
+        console.log('data from api', data);
         return data;
       }
 

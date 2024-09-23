@@ -4,8 +4,8 @@ import { profileAPI } from "../../api/instance";
 import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { createPostHTML } from '../../ui/post/displayPost';
 
-const logoutButton = document.querySelector(".Logout-button");
-logoutButton.addEventListener("click", onLogout);
+// const logoutButton = document.querySelector(".Logout-button");
+// logoutButton.addEventListener("click", onLogout);
 
 displayLoggedInUser();
 
@@ -16,6 +16,8 @@ export async function readPostsByUser(username) {
       const response = await profileAPI.profile.readPosts(username);
       console.log("Posts:", response);
       const posts = response || [];
+      console.log('posts by user', posts);
+  
   
       const postContainer = document.querySelector(".dashboard-container");
       postContainer.innerHTML = "";
@@ -23,6 +25,8 @@ export async function readPostsByUser(username) {
       posts.forEach(post => {
         const postElement = createPostHTML(post,profileUserName);
         postContainer.appendChild(postElement);
+
+        return posts;
 
       });
     } catch (error) {
