@@ -24,9 +24,15 @@ export default class ProfileAPI {
     return `${this.apiBase}/social/profiles/${username}`;
   }
 
-  getPostsByUserURL() {
-    const username = this.getUserName();
-    if (!username) throw new Error("User is not logged in.");
+  // getPostsByUserURL() {
+  //   const username = this.getUserName();
+  //   if (!username) throw new Error("User is not logged in.");
+  //   return `${this.apiBase}/social/profiles/${username}/posts`;
+  // }
+  getPostsByUserURL(username) {
+    if (!username) {
+      throw new Error("Username is required to fetch posts.");
+    }
     return `${this.apiBase}/social/profiles/${username}/posts`;
   }
 
@@ -51,8 +57,25 @@ export default class ProfileAPI {
       throw new Error(errorMessage);
     },
 
-    readPosts: async () => {
-        const url = this.getPostsByUserURL();
+    // readPosts: async () => {
+    //     const url = this.getPostsByUserURL();
+    //   const response = await fetch(url, {
+    //     method: "GET",
+    //     headers: headers(),
+    //   });
+
+    //   if (response.ok) {
+    //     const { data } = await response.json();
+    //     return data;
+    //   }
+
+    //   const errorData = await response.json();
+    //   const errorMessage =
+    //     errorData.errors[0]?.message || "Could not read posts by this user";
+    //   throw new Error(errorMessage);
+    // },
+    readPosts: async (username) => {
+      const url = this.getPostsByUserURL(username || this.getUserName());
       const response = await fetch(url, {
         method: "GET",
         headers: headers(),

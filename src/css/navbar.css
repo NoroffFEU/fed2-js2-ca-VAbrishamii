@@ -4,10 +4,15 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  margin: 5px auto;
+  margin: 0.5rem auto;
+  
 }
 .logo {
   width: 100px;
+}
+.logo img {
+  width: 150%;
+  margin: 0 auto;
 }
 .menu i {
   font-size: 1.5rem;

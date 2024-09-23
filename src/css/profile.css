@@ -1,15 +1,12 @@
 .profile-container {
   display: flex;
   padding: 20px;
-
-
-  
 }
 .profile-link {
   display: flex;
   align-items: center;
   cursor: pointer;
-  position: relative; 
+  position: relative;
   margin-left: auto;
 }
 .profile {
@@ -65,7 +62,6 @@
   gap: 20px;
   padding: 50px;
   margin: 0 auto;
-
 }
 .post-actions {
   position: absolute;
@@ -76,3 +72,67 @@
   color: #4f4e4e;
   margin-bottom: 5px;
 }
+
+/* allusers */
+.allprofile-container {
+  margin: 0 auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 100vh;
+  
+
+}
+.allprofile-header {
+
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+.allprofile-header a {
+  margin: 0 auto;
+}
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* margin-right: 15px; */
+  margin: 0 auto;
+  border: 2px solid #ddd;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+.profile-username {
+  font-size: 10px;
+  /* font-weight: bold; */
+  margin: 0 auto;
+}
+.profile-bio {
+  font-size: 14px;
+  margin: 5px 0;
+}
+.allprofile-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+.allprofile-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+.allprofile-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+

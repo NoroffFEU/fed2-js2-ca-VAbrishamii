@@ -1,11 +1,27 @@
 
+.feed-page{
+  padding: 20px;
+  flex: 1;
+  
+ 
+}
+.feed-content{
+  display: grid;
+  grid-template-columns: 1fr 5fr; 
+
+}
+
+
 .feed-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
     padding: 20px;
+ 
   }
+
+
 
   .post-link {
     min-height: 300px; 

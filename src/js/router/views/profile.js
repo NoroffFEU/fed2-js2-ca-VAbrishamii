@@ -11,9 +11,9 @@ displayLoggedInUser();
 
 const profileUserName = profileAPI.getUserName();
 
-async function readPostsByUser() {
+export async function readPostsByUser(username) {
     try {
-      const response = await profileAPI.profile.readPosts();
+      const response = await profileAPI.profile.readPosts(username);
       console.log("Posts:", response);
       const posts = response || [];
   
