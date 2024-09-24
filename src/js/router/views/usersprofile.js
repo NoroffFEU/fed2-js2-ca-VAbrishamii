@@ -1,4 +1,4 @@
-import { followUser } from "../../ui/profile/allprofiles";
+import { displayPostsFromFollowing, followUser } from "../../ui/profile/allprofiles";
 import { unfollowUser } from "../../ui/profile/allprofiles";
 import { profileAPI } from "../../api/instance";
 
@@ -9,9 +9,11 @@ const getUserFromURL = () => {
     return params.get("user");
    
 };
+
 export async function initializeFollowButton() {
     const username = getUserFromURL();
     const isFollowing = await profileAPI.checkIfFollowing(username);
+    console.log(`Checking if following ${username}:`, isFollowing);
     const followButton = document.querySelector(".follow-btn");
     const unfollowButton = document.querySelector(".unfollow-btn");
 
@@ -26,8 +28,10 @@ export async function initializeFollowButton() {
         await unfollowUser(username);
     });
     if(isFollowing){
+
         followButton.style.display = "none";
         unfollowButton.style.display = "block";
+        displayPostsFromFollowing();
 
     } else {    
         followButton.style.display = "block";
@@ -36,22 +40,3 @@ export async function initializeFollowButton() {
 }
 initializeFollowButton();
 
-
-// export async function readUserPosts() {
-//     const username = getUserFromURL();
-//     console.log('username', username);
-//     const posts = await profileAPI.profile.readPosts(username);
-//     console.log('posts', posts);
-//     displayUserPosts(posts);
-  
-// }
-
-// export async function displayUserPosts(posts) {
-//     const postContainer = document.querySelector(".userpost-container");
-//     postContainer.innerHTML = "";
-//     posts.forEach(post => {
-//         const postElement = createPostHTML(post);
-//         postContainer.appendChild(postElement);
-//     });
-// }
-// readUserPosts();

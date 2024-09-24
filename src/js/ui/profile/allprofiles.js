@@ -1,5 +1,7 @@
 
 import { profileAPI } from "../../api/instance";
+import { createPostHTML } from "../post/displayPost";
+
 
 export async function AllProfiles() {
   try {
@@ -11,7 +13,6 @@ export async function AllProfiles() {
       return;
     }
     const profiles = response;
-    console.log("profiles", profiles);
 
     const profileList = document.querySelector(".allprofile-container");
     profileList.innerHTML = "";
@@ -64,4 +65,27 @@ export async function unfollowUser(username) {
   }
 }
 
+export async function displayPostsFromFollowing() {
+  try {
+    const posts = await profileAPI.profile.getPostsFromFollowing();
+    console.log("Raw API response:", posts);
+
+    if (posts.length === 0) {
+      console.log("No posts from followed users");
+      return;
+    }else{
+      console.log("posts", posts);
+    }
+
+    const postContainer = document.querySelector(".userpost-container");
+    postContainer.innerHTML = "";
+    posts.forEach((post) => {
+      const postElement = createPostHTML(post);
+      postContainer.appendChild(postElement);
+      return posts;
+    });
+  } catch (error) {
+    console.error("Error fetching posts:", error.message);
+  }
+}
 

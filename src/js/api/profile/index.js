@@ -4,10 +4,12 @@ import { headers } from "../headers";
 export default class ProfileAPI {
   apiBase = "";
   allprofile = "";
+  postsfromfollowing = "";
 
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
     this.allprofile = `${this.apiBase}/social/profiles`;
+    this.postsfromfollowing = `${this.apiBase}/social/posts/following`;
   }
 
   getUserName() {
@@ -149,6 +151,24 @@ async checkIfFollowing(username) {
       const errorData = await response.json();
       const errorMessage =
         errorData.errors[0]?.message || "Could not unfollow user";
+      throw new Error(errorMessage);
+    },
+
+    getPostsFromFollowing: async () => {
+      const response = await fetch(this.postsfromfollowing, {
+        method: "GET",
+        headers: headers(),
+      });
+      console.log('response', response);
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      const errorData = await response.json();
+      const errorMessage =
+        errorData.errors[0]?.message || "Could not read posts from following";
       throw new Error(errorMessage);
     },
 
