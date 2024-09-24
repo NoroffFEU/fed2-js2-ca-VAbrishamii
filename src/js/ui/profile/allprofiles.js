@@ -36,3 +36,32 @@ export async function AllProfiles() {
   }
 }
 
+export async function followUser(username) {
+  try {
+    const response = await profileAPI.profile.follow(username);
+    console.log("response", response);
+    if (response.error) {
+      console.error(response.error);
+      return;
+    }
+    location.reload();
+  } catch (error) {
+    console.error("Error following user:", error.message);
+  }
+}
+
+export async function unfollowUser(username) {
+  try {
+    const response = await profileAPI.profile.unfollow(username);
+    console.log("response", response);
+    if (response.error) {
+      console.error(response.error);
+      return;
+    }
+    location.reload();
+  } catch (error) {
+    console.error("Error unfollowing user:", error.message);
+  }
+}
+
+

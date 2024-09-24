@@ -24,17 +24,37 @@ export default class ProfileAPI {
     return `${this.apiBase}/social/profiles/${username}`;
   }
 
-  // getPostsByUserURL() {
-  //   const username = this.getUserName();
-  //   if (!username) throw new Error("User is not logged in.");
-  //   return `${this.apiBase}/social/profiles/${username}/posts`;
-  // }
   getPostsByUserURL(username) {
     if (!username) {
       throw new Error("Username is required to fetch posts.");
     }
     return `${this.apiBase}/social/profiles/${username}/posts`;
   }
+
+async checkIfFollowing(username) {
+  try {
+    const loggedInUser = this.getUserName(); 
+    const url = `${this.apiBase}/social/profiles/${loggedInUser}?_following=true`; // Fetch following details
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: headers(), 
+    });
+
+    if (response.ok) {
+      const { data } = await response.json(); 
+      const followingUsers = data.following.map(user => user.name); 
+      return followingUsers.includes(username); 
+    } else {
+      const errorData = await response.json();
+      console.error("Error fetching following list:", errorData);
+      return false;
+    }
+  } catch (error) {
+    console.error("Error in checkIfFollowing function:", error.message);
+    return false;
+  }
+}
 
   profile = {
     update: async ({ name }) => {
@@ -57,23 +77,6 @@ export default class ProfileAPI {
       throw new Error(errorMessage);
     },
 
-    // readPosts: async () => {
-    //     const url = this.getPostsByUserURL();
-    //   const response = await fetch(url, {
-    //     method: "GET",
-    //     headers: headers(),
-    //   });
-
-    //   if (response.ok) {
-    //     const { data } = await response.json();
-    //     return data;
-    //   }
-
-    //   const errorData = await response.json();
-    //   const errorMessage =
-    //     errorData.errors[0]?.message || "Could not read posts by this user";
-    //   throw new Error(errorMessage);
-    // },
     readPosts: async (username) => {
       const url = this.getPostsByUserURL(username || this.getUserName());
       console.log('url', url);
@@ -111,7 +114,44 @@ export default class ProfileAPI {
         errorData.errors[0]?.message || "Could not read all profiles";
       throw new Error(errorMessage);
 
-    }
+    },
+    follow: async (username) => {
+      const url = `${this.apiBase}/social/profiles/${username}/follow`;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: headers(),
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      const errorData = await response.json();
+      const errorMessage =
+        errorData.errors[0]?.message || "Could not follow user";
+      throw new Error(errorMessage);
+
+    },
+
+    unfollow: async (username) => {
+      const url = `${this.apiBase}/social/profiles/${username}/unfollow`;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: headers(),
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      const errorData = await response.json();
+      const errorMessage =
+        errorData.errors[0]?.message || "Could not unfollow user";
+      throw new Error(errorMessage);
+    },
+
 
   };
   
