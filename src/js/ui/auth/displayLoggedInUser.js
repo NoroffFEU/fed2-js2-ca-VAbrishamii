@@ -2,7 +2,7 @@
 
 export function displayLoggedInUser() {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  // console.log(user);
 
 
   if (user) {

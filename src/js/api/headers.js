@@ -2,7 +2,6 @@ import { API_KEY } from "./constants";
 
 export function headers() {
   const token = localStorage.getItem('accessToken');
-  console.log("Retrieved token:", token);
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
