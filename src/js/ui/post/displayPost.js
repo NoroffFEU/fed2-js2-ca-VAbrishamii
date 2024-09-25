@@ -382,7 +382,7 @@ export async function displayPosts(posts) {
 
   posts.forEach(async (post) => {
     try {
-      const storeComments = JSON.parse(localStorage.getItem('data.body-${post.id}')) || {};
+      const storeComments = JSON.parse(localStorage.getItem('data.comments.body-${post.id}')) || {};
       console.log('store comments', storeComments);
       const postElement = createPostHTML(post, storeComments);
       feedContainer.appendChild(postElement);
