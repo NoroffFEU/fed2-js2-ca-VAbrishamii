@@ -305,19 +305,21 @@ export function createPostHTML(post, profileUserName, comments = []) {
     console.log('comment body', comment);
     if (comment) {
       try {
-        await postAPI.post.comment(post.id, { body: comment });
+        const newComment = await postAPI.post.comment(post.id, { body: comment });
+        // comments.push(newComment);
         commentTextArea.value = "";
-        const updatedComments = await postAPI.post.getComments(post.id); 
-        updatedCommentDisplay(commentsContainer, updatedComments);
+        const newComments = document.createElement("p");
+        newComments.classList.add("post-comment");
+        newComments.textContent = newComment.body;
+        commentsContainer.appendChild(newComments);
 
         const commentCount = commentsContainer.querySelector(".comments-title span");
         commentCount.textContent = ` ${parseInt(commentCount.textContent) + 1} `;
+        console.log("Comment posted successfully:", newComment);
       } catch (error) {
         console.error("Error commenting on post:", error);
         alert("Could not comment on post. Please try again.");
       }
-    }else {
-      alert('Please enter a comment');
     }
   });
 
@@ -352,15 +354,6 @@ function toggleCommentForm(postId) {
   }
 }
 
-function updatedCommentDisplay(commentsContainer, comments) {
-  commentsContainer.innerHTML = ""; 
-  comments.forEach((comment) => {
-    const commentElement = document.createElement("p");
-    commentElement.classList.add("post-comment");
-    commentElement.textContent = comment.body;
-    commentsContainer.appendChild(commentElement);
-  });
-}
 
 
 function showReplyForm(actionIconsContainer) {
@@ -389,8 +382,9 @@ export async function displayPosts(posts) {
 
   posts.forEach(async (post) => {
     try {
-      const comments = await postAPI.post.comment(post.id);
-      const postElement = createPostHTML(post, comments);
+      const storeComments = JSON.parse(localStorage.getItem('data.body-${post.id}')) || {};
+      console.log('store comments', storeComments);
+      const postElement = createPostHTML(post, storeComments);
       feedContainer.appendChild(postElement);
     } catch (error) {
       console.error("Error fetching comments:", error);

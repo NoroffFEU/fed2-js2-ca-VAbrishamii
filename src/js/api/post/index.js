@@ -180,7 +180,10 @@ export default class PostAPI {
     getComments: async (postId) => {
       try {
         const response = await fetch(
-          `${this.apiCommentPosts.replace("id", postId)}`);
+          `${this.apiCommentPosts.replace("id", postId)}`
+      
+        );
+
         if (!response.ok) {
           throw new Error("Could not fetch comments");
         }
