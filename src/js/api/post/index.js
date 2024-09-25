@@ -7,6 +7,7 @@ export default class PostAPI {
   apiReadPosts = "";
   apiUpdatePosts = "";
   apiDeletePosts = "";
+  apiCommentPosts = "";
 
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
@@ -14,7 +15,10 @@ export default class PostAPI {
     this.apiReadPosts = `${this.apiBase}/social/posts`;
     this.apiUpdatePosts = `${this.apiBase}/social/posts/id`;
     this.apiDeletePosts = `${this.apiBase}/social/posts/id`;
+    this.apiCommentPosts = `${this.apiBase}/social/posts/id/comment`;
   }
+
+
 
   post = {
     create: async ({ title, body, tags, media }) => {
@@ -123,52 +127,6 @@ export default class PostAPI {
     }
   },
 
-  
-
-    //   try {
-    //     const existingPost = await fetch(
-    //       `${this.apiReadPosts.replace("id", postId)}`,
-    //       {
-    //         method: "GET",
-    //         headers: headers(),
-    //       }
-    //     );
-
-    //     if (!existingPost.ok) {
-    //       throw new Error("Post not found.");
-    //     }
-
-    //     const post = await existingPost.json();
-
-    //     if (post.userId !== user.id) {
-    //       throw new Error("You are not authorized to update this post.");
-    //     }
-
-    //     const response = await fetch(
-    //       `${this.apiUpdatePosts.replace("id", postId)}`,
-    //       {
-    //         method: "PUT",
-    //         headers: headers(),
-    //         body: JSON.stringify(updatedData),
-    //       }
-    //     );
-
-    //     if (response.ok) {
-    //       const data = await response.json();
-    //       console.log("Post updated successfully:", data);
-    //       return data;
-    //     } else {
-    //       const errorData = await response.json();
-    //       throw new Error(
-    //         errorData.errors[0]?.message || "Could not update post"
-    //       );
-    //     }
-    //   } catch (error) {
-    //     console.error("Error updating post:", error.message);
-    //     throw error;
-    //   }
-    // },
-
     delete: async (postId) => {
       try {
         const response = await fetch(`${this.apiDeletePosts.replace("id", postId)}`, {
@@ -188,5 +146,51 @@ export default class PostAPI {
         throw error;
       }
     },
+    comment: async (postId, { body, replyToId = null } = {}) => {
+      console.log('comment method', postId, body, replyToId);
+      if (!body) {
+        throw new Error("Comment body is required");
+      }
+      const requestBody = JSON.stringify({ body, replyToId });
+      try {
+        const response = await fetch(
+          `${this.apiCommentPosts.replace("id", postId)}`,
+          {
+            method: "POST",
+            headers: headers(),
+            body: requestBody,
+          }
+        );
+        console.log('commetn response', response);
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Comment posted successfully:", data);
+          return data;
+        } else {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.errors[0]?.message || "Could not post comment"
+          );
+        }
+      } catch (error) {
+        console.error("Error posting comment:", error.message);
+        throw error;
+      }
+    },
+    getComments: async (postId) => {
+      try {
+        const response = await fetch(
+          `${this.apiCommentPosts.replace("id", postId)}`);
+        if (!response.ok) {
+          throw new Error("Could not fetch comments");
+        }
+        return response.json();
+      } catch (error) {   
+        console.error("Error fetching comments:", error.message);
+        throw error;
+      }
+    }
+       
+
   };
 }
