@@ -16,9 +16,13 @@ export default class PostAPI {
     this.apiUpdatePosts = `${this.apiBase}/social/posts/id`;
     this.apiDeletePosts = `${this.apiBase}/social/posts/id`;
     this.apiCommentPosts = `${this.apiBase}/social/posts/id/comment`;
+  } catch (error) {
+    console.error("Error posting comment:", error.message);
+    throw error;
+  } catch (error) {
+    console.error("Error posting comment:", error.message);
+    throw error;
   }
-
-
 
   post = {
     create: async ({ title, body, tags, media }) => {
@@ -59,9 +63,15 @@ export default class PostAPI {
     },
 
     read: async () => {
-      const response = await fetch(this.apiReadPosts, {
+      const params = new URLSearchParams({
+        _author: true,
+        _comments: true,
+        _reactions: true,
+      });
+      const response = await fetch(`${this.apiReadPosts}?${params}`, {
         method: "GET",
         headers: headers(),
+
       });
 
       if (response.ok) {
@@ -146,39 +156,40 @@ export default class PostAPI {
         throw error;
       }
     },
-    comment: async (postId, {body :comment, replyId}) => {
-      const body = {body: comment};
-      if (replyId !== undefined && replyId !== null) {
-        body.replyToId = replyId;
-      }
-      const requestBody = JSON.stringify(body);
-      console.log('comment method', postId, requestBody);
-      try {
-        const response = await fetch(
-          `${this.apiCommentPosts.replace("id", postId)}`,
-          {
-            method: "POST",
-            headers: headers(),
-            body: requestBody,
-          }
-        );
-        console.log('commetn response', response);
-        if (response.ok) {
-          const data = await response.json();
-          console.log("Comment posted successfully:", data);
-          return data;
-        } else {
-          const errorData = await response.json();
-          throw new Error(
-            errorData.errors[0]?.message || "Could not post comment"
-          );
+  
+  comment: async (postId, { body: comment }) => {
+    const requestBody = JSON.stringify({ body: comment });
+    console.log('comment method', postId, requestBody);
+    
+    try {
+      const response = await fetch(
+        `${this.apiCommentPosts.replace("id", postId)}`,
+        {
+          method: "POST",
+          headers: headers(),
+          body: requestBody,
         }
-      } catch (error) {
-        console.error("Error posting comment:", error.message);
-        throw error;
+      );
+      
+      console.log('comment response', response);
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Comment posted successfully:", data);
+        return data;
+      } else {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.errors[0]?.message || "Could not post comment"
+        );
       }
+    } catch (error) {
+      console.error("Error posting comment:", error.message);
+      throw error;
     }
-       
+  }
+  
 
   };
+
 }
