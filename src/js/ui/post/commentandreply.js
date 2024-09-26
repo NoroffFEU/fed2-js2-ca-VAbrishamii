@@ -44,7 +44,11 @@ export function createPostInteractions(post, comments) {
         replyText.style.cursor = "pointer";
         replyText.addEventListener("click", (event) => {
           event.preventDefault();
-          showReplyForm(commentElement, post.id, data.id);  
+          console.log('postId', newReply.data.postId);
+          console.log('objectId', data.id);
+
+          showReplyForm(commentElement, comment.data.postId, comment.data.id);
+          
         });
         commentElement.appendChild(replyText);
         commentsContainer.appendChild(commentElement);
@@ -78,7 +82,6 @@ export function createPostInteractions(post, comments) {
         try {
           const newComment = await postAPI.post.comment(post.id, { body: comment });
           console.log('new comment', newComment);
-        //   const commentId = newComment.data.id;
           commentTextArea.value = ""; 
           commentForm.style.display = "none";  
   
@@ -129,6 +132,7 @@ export function createPostInteractions(post, comments) {
 
   function toggleCommentForm(postId) {
     const commentForm = document.querySelector(`.comment-form[data-post-id="${postId}"]`); 
+
     if (commentForm) {
       commentForm.style.display = commentForm.style.display === "none" ? "block" : "none";
     }
@@ -137,29 +141,16 @@ export function createPostInteractions(post, comments) {
 
   async function sendReply(postId, commentId, replyText) {
 
-    const requestBody = { body: replyText, replyToId: commentId || null };
+    const requestBody = { body: replyText, replyToId: commentId };
+    console.log('reply body', requestBody);
     try {
       const newReply = await postAPI.post.comment(postId, requestBody);
       console.log("Reply posted successfully:", newReply);
       return newReply;
       
     } catch (error) {
-      // Check if error.response exists before accessing its properties
-      if (error.response) {
-        if (error.response.status === 400) {
-          console.error("Bad Request: The comment is not associated with the post.");
-          alert("The comment is not associated with this post.");
-        } else if (error.response.status === 404) {
-          console.error("Not Found: The comment does not exist.");
-          alert("The comment you're replying to does not exist.");
-        } else {
-          console.error("Error replying to comment:", error);
-          alert("Could not reply to the comment. Please try again.");
-        }
-      } else {
-        console.error("Network or unexpected error:", error);
-        alert("An unexpected error occurred. Please try again.");
-      }
+        console.error("Error replying to comment:", error);
+
     }
   }
   
