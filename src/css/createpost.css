@@ -46,4 +46,26 @@
   .create-post-form button:hover {
     background-color: #004494;
   }
+  .comment {
+    margin-bottom: 10px;
+  }
+  
+  .comment strong {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .post-comment {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .reply-text {
+    color: blue;
+    text-decoration: underline;
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 0.9em;
+  }
   

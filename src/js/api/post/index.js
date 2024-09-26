@@ -146,12 +146,13 @@ export default class PostAPI {
         throw error;
       }
     },
-    comment: async (postId, { body, replyToId = null } = {}) => {
-      console.log('comment method', postId, body, replyToId);
-      if (!body) {
-        throw new Error("Comment body is required");
+    comment: async (postId, {body :comment, replyId}) => {
+      const body = {body: comment};
+      if (replyId !== undefined && replyId !== null) {
+        body.replyToId = replyId;
       }
-      const requestBody = JSON.stringify({ body, replyToId });
+      const requestBody = JSON.stringify(body);
+      console.log('comment method', postId, requestBody);
       try {
         const response = await fetch(
           `${this.apiCommentPosts.replace("id", postId)}`,
@@ -174,22 +175,6 @@ export default class PostAPI {
         }
       } catch (error) {
         console.error("Error posting comment:", error.message);
-        throw error;
-      }
-    },
-    getComments: async (postId) => {
-      try {
-        const response = await fetch(
-          `${this.apiCommentPosts.replace("id", postId)}`
-      
-        );
-
-        if (!response.ok) {
-          throw new Error("Could not fetch comments");
-        }
-        return response.json();
-      } catch (error) {   
-        console.error("Error fetching comments:", error.message);
         throw error;
       }
     }
