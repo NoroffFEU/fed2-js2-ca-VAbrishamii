@@ -39,6 +39,31 @@ export default class ProfileAPI {
     return `${this.apiBase}/social/profiles/${username}/posts`;
   }
 
+  getProfileDetails = async (username, { followers = false, following = false, posts = false }) => {
+    const params = this.createParams({
+      _followers: followers,
+      _following: following,
+      _posts: posts,
+    });
+
+    const url = `${this.allprofile}/${username}?${params}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: headers(),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('gerProfileDetails', data);
+      return data;
+    }
+
+    const errorData = await response.json();
+    const errorMessage =
+      errorData.errors[0]?.message || "Could not fetch profile details";
+    throw new Error(errorMessage);
+  };
+
 // async checkIfFollowing(username) {
 //   try {
 //     const loggedInUser = this.getUserName(); 
@@ -113,6 +138,8 @@ export default class ProfileAPI {
     allProfiles: async () => {
       const params = this.createParams({
         _following: true, 
+        _followers: true,
+        _posts: true,
       });
       const url = `${this.allprofile}?${params}`;
 

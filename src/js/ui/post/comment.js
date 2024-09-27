@@ -108,6 +108,8 @@
 
 import { postAPI } from "../../api/instance";
 
+
+
 export function createPostInteractions(post, comments) {
   const interactionsContainer = document.createElement("div");
   interactionsContainer.classList.add("post-interactions");
@@ -123,17 +125,35 @@ export function createPostInteractions(post, comments) {
   commentIcon.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // Toggle comment section and load existing comments
-    toggleCommentsDisplay(post.id, commentsContainer, comments);
+    toggleCommentForm(post.id);  
   });
   commentsTitle.appendChild(commentIcon);
 
   const commentCount = document.createElement("span");
-  commentCount.textContent = ` ${comments.length} `;
+  commentCount.textContent = ` ${comments.length} `;  // Show the number of comments
   commentsTitle.appendChild(commentCount);
   commentsContainer.appendChild(commentsTitle);
 
-  // Create a form for adding new comments
+  // Render the comments
+  if (comments.length > 0) {
+    comments.forEach((comment) => {
+      const commentElement = document.createElement("div");
+      commentElement.classList.add("comment");
+
+      const ownerName = document.createElement("strong");
+      ownerName.textContent = comment.owner;  // Correct access
+      commentElement.appendChild(ownerName);
+
+      const commentText = document.createElement("p");
+      commentText.classList.add("post-comment");
+      commentText.textContent = comment.body;  // Correct access
+      commentElement.appendChild(commentText);
+
+      commentsContainer.appendChild(commentElement);
+    });
+  }
+
+  // Comment form setup
   const commentForm = document.createElement("form");
   commentForm.classList.add("comment-form");
   commentForm.style.display = "none";
@@ -158,28 +178,26 @@ export function createPostInteractions(post, comments) {
         commentTextArea.value = ""; 
         commentForm.style.display = "none";  
 
-        // Create a new comment element
+        // Add the new comment to the DOM
         const commentElement = document.createElement("div");
         commentElement.classList.add("comment");
 
         const ownerName = document.createElement("strong");
-        ownerName.textContent = newComment.data.comments.owner;  // Access owner directly
+        ownerName.textContent = newComment.data.comments.owner;  // Fixed: Correct access to owner
         commentElement.appendChild(ownerName);
 
         const newComments = document.createElement("p");
         newComments.classList.add("post-comment");
-        newComments.textContent = newComment.data.comments.body;  // Access body directly
+        newComments.textContent = newComment.data.comments.body;  // Fixed: Correct access to body
         commentElement.appendChild(newComments);
 
         commentsContainer.appendChild(commentElement);
 
+        // Update comment count
         const commentCount = commentsContainer.querySelector(".comments-title span");
         if (commentCount) {
           commentCount.textContent = ` ${parseInt(commentCount.textContent) + 1} `;
-        } else {
-          console.error("Comment count element not found.");
         }
-        
 
         console.log("Comment posted successfully:", newComment);
       } catch (error) {
@@ -197,28 +215,7 @@ export function createPostInteractions(post, comments) {
   return interactionsContainer;
 }
 
-// Function to toggle and load all comments
-function toggleCommentsDisplay(postId, commentsContainer, comments) {
-  commentsContainer.innerHTML = '';  // Clear the existing comments container
-
-  // Display the comments
-  comments.forEach((comment) => {
-    const commentElement = document.createElement("div");
-    commentElement.classList.add("comment");
-
-    const ownerName = document.createElement("strong");
-    ownerName.textContent = comment.owner;  // Correct access to comment owner
-    commentElement.appendChild(ownerName);
-
-    const commentText = document.createElement("p");
-    commentText.classList.add("post-comment");
-    commentText.textContent = comment.body;  // Correct access to comment body
-    commentElement.appendChild(commentText);
-
-    commentsContainer.appendChild(commentElement);
-  });
-
-  // Toggle the visibility of the comment form and container
+function toggleCommentForm(postId) {
   const commentForm = document.querySelector(`.comment-form[data-post-id="${postId}"]`);
   if (commentForm) {
     commentForm.style.display = commentForm.style.display === "none" ? "block" : "none";

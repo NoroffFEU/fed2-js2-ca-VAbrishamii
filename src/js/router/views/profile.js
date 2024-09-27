@@ -21,14 +21,20 @@ export async function readPostsByUser(username) {
   
       const postContainer = document.querySelector(".dashboard-container");
       postContainer.innerHTML = "";
+
+      // posts.forEach(post => {
+      //   const postElement = createPostHTML(post,profileUserName);
+      //   postContainer.appendChild(postElement);
+      // });
       
-      posts.forEach(post => {
-        const postElement = createPostHTML(post,profileUserName);
+     
+        for (const post of posts) {
+        const postElement = await createPostHTML(post,profileUserName);
         postContainer.appendChild(postElement);
 
-        return posts;
+        // return posts;
 
-      });
+      };
     } catch (error) {
       console.error("Error fetching posts:", error);
     }

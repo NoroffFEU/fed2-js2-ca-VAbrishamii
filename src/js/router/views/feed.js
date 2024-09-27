@@ -31,10 +31,16 @@ async function fetchAllPosts() {
     const postContainer = document.querySelector(".feed-container");
     postContainer.innerHTML = ""; 
 
-    paginatedPosts.forEach(post => {
-      const postElement = createPostHTML(post);
+    // paginatedPosts.forEach(post => {
+    //   const postElement = createPostHTML(post);
+    //   postContainer.appendChild(postElement);
+    // });
+
+    for (const post of paginatedPosts) {
+      const postElement = await createPostHTML(post);
       postContainer.appendChild(postElement);
-    });
+    }
+  
 
     handlePagination(totalPosts);
   } catch (error) {

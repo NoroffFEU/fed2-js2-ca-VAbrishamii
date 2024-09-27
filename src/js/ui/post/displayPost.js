@@ -2,7 +2,7 @@ import { postAPI } from '../../api/instance';
 import { createPostInteractions } from './comment';
 import { createAuthorContainer } from './follow';
 
-export function createPostHTML(post, profileUserName, comments = []) {
+export async function createPostHTML(post, profileUserName, comments = []) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post");
 
@@ -38,10 +38,15 @@ export function createPostHTML(post, profileUserName, comments = []) {
     actionsContainer.appendChild(deleteIcon);
     postContainer.appendChild(actionsContainer);
   }else{
-    const authorContainer = createAuthorContainer(post);
+    try {
+    const authorContainer = await createAuthorContainer(post);
     postContainer.appendChild(authorContainer);
+    } catch (error) {
+
+      console.error("Error fetching comments:", error);  
 
   }
+}
  
   const titleElement = document.createElement("h1");
   titleElement.classList.add("post-title");
@@ -78,18 +83,35 @@ export function createPostHTML(post, profileUserName, comments = []) {
 
 
 
-
 export async function displayPosts(posts) {
   const feedContainer = document.querySelector(".feed-container");
   feedContainer.innerHTML = "";
 
-  posts.forEach(async (post) => {
+  // posts.forEach(async (post) => {
+    for (const post of posts) {
     try {
-
-      const postElement = createPostHTML(posts );
+      const profileUserName = post.author.name; // Extract the profile username from the post
+      const comments = []; // Assuming you're fetching comments separately (if available)
+      
+      const postElement = await createPostHTML(post, profileUserName, comments); // Pass post, profileUserName, and comments
       feedContainer.appendChild(postElement);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
-  });
+  };
 }
+
+// export async function displayPosts(posts) {
+//   const feedContainer = document.querySelector(".feed-container");
+//   feedContainer.innerHTML = "";
+
+//   posts.forEach(async (post) => {
+//     try {
+
+//       const postElement = createPostHTML(posts );
+//       feedContainer.appendChild(postElement);
+//     } catch (error) {
+//       console.error("Error fetching comments:", error);
+//     }
+//   });
+// }
