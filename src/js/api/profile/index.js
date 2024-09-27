@@ -18,6 +18,12 @@ export default class ProfileAPI {
     return user?.name || null;
   }
 
+  createParams(options) {
+    const params = new URLSearchParams(options);
+    return params.toString();
+  }
+
+
   getUpdateProfileURL() {
     const username = this.getUserName();
     if (!username) {
@@ -33,30 +39,30 @@ export default class ProfileAPI {
     return `${this.apiBase}/social/profiles/${username}/posts`;
   }
 
-async checkIfFollowing(username) {
-  try {
-    const loggedInUser = this.getUserName(); 
-    const url = `${this.apiBase}/social/profiles/${loggedInUser}?_following=true`; // Fetch following details
+// async checkIfFollowing(username) {
+//   try {
+//     const loggedInUser = this.getUserName(); 
+//     const url = `${this.apiBase}/social/profiles/${loggedInUser}?_following=true`; // Fetch following details
 
-    const response = await fetch(url, {
-      method: "GET",
-      headers: headers(), 
-    });
+//     const response = await fetch(url, {
+//       method: "GET",
+//       headers: headers(), 
+//     });
 
-    if (response.ok) {
-      const { data } = await response.json(); 
-      const followingUsers = data.following.map(user => user.name); 
-      return followingUsers.includes(username); 
-    } else {
-      const errorData = await response.json();
-      console.error("Error fetching following list:", errorData);
-      return false;
-    }
-  } catch (error) {
-    console.error("Error in checkIfFollowing function:", error.message);
-    return false;
-  }
-}
+//     if (response.ok) {
+//       const { data } = await response.json(); 
+//       const followingUsers = data.following.map(user => user.name); 
+//       return followingUsers.includes(username); 
+//     } else {
+//       const errorData = await response.json();
+//       console.error("Error fetching following list:", errorData);
+//       return false;
+//     }
+//   } catch (error) {
+//     console.error("Error in checkIfFollowing function:", error.message);
+//     return false;
+//   }
+// }
 
   profile = {
     update: async ({ name }) => {
@@ -80,7 +86,12 @@ async checkIfFollowing(username) {
     },
 
     readPosts: async (username) => {
-      const url = this.getPostsByUserURL(username || this.getUserName());
+      const params = this.createParams({
+        _author: true,
+        _comments: true,
+        _reactions: true,
+      });
+      const url = `${this.getPostsByUserURL(username || this.getUserName())}?${params}`;
       console.log('url', url);
       const response = await fetch(url, {
         method: "GET",
@@ -100,7 +111,12 @@ async checkIfFollowing(username) {
     },
 
     allProfiles: async () => {
-      const response = await fetch(this.allprofile, {
+      const params = this.createParams({
+        _following: true, 
+      });
+      const url = `${this.allprofile}?${params}`;
+
+      const response = await fetch(url, {
         method: "GET",
         headers: headers(),
       });
@@ -118,7 +134,9 @@ async checkIfFollowing(username) {
 
     },
     follow: async (username) => {
+   
       const url = `${this.apiBase}/social/profiles/${username}/follow`;
+      console.log('follow url', url);
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),
@@ -137,6 +155,7 @@ async checkIfFollowing(username) {
     },
 
     unfollow: async (username) => {
+     
       const url = `${this.apiBase}/social/profiles/${username}/unfollow`;
       const response = await fetch(url, {
         method: "PUT",
@@ -155,7 +174,13 @@ async checkIfFollowing(username) {
     },
 
     getPostsFromFollowing: async () => {
-      const response = await fetch(this.postsfromfollowing, {
+      const params = this.createParams({
+        _author: true,
+        _comments: true,
+        _reactions: true,
+      });
+      const url = `${this.postsfromfollowing}?${params}`;
+      const response = await fetch(url, {
         method: "GET",
         headers: headers(),
       });

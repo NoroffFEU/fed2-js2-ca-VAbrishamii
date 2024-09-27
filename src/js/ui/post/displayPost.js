@@ -1,5 +1,6 @@
 import { postAPI } from '../../api/instance';
 import { createPostInteractions } from './comment';
+import { createAuthorContainer } from './follow';
 
 export function createPostHTML(post, profileUserName, comments = []) {
   const postContainer = document.createElement("div");
@@ -36,33 +37,12 @@ export function createPostHTML(post, profileUserName, comments = []) {
     });
     actionsContainer.appendChild(deleteIcon);
     postContainer.appendChild(actionsContainer);
+  }else{
+    const authorContainer = createAuthorContainer(post);
+    postContainer.appendChild(authorContainer);
+
   }
-
-
-  const authorContainer = document.createElement("div");
-  authorContainer.classList.add("post-author-container");
-
-  const avatarElement = document.createElement("img");
-  avatarElement.classList.add("post-author-avatar");
-  avatarElement.src = post.author.avatar.url || "default-avatar.png"; // Use a default avatar if none is provided
-  avatarElement.alt = `${post.author.name}'s avatar`;
-  avatarElement.addEventListener('click', () => {
-    window.location.href = `/profile/?id=${post.author.id}`; // Adjust URL as necessary
-  });
-  authorContainer.appendChild(avatarElement);
-
-  const authorLink = document.createElement("a");
-  authorLink.classList.add("post-author-name");
-  authorLink.href = `/profile/?id=${post.author.id}`; // Adjust URL as necessary
-  authorLink.textContent = post.author.name;
-  authorLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    window.location.href = `/profile/?id=${post.author.id}`; // Ensure navigation to profile
-  });
-
-  authorContainer.appendChild(authorLink);
-  postContainer.appendChild(authorContainer);
-
+ 
   const titleElement = document.createElement("h1");
   titleElement.classList.add("post-title");
 

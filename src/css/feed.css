@@ -134,5 +134,21 @@ margin: 35px;
     margin: 0 auto;
 
   }
+.post-author-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
 
-
+}
+.post-author-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.post-author-container a {
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: bold;
+}

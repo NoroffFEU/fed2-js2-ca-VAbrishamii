@@ -135,4 +135,11 @@
 .allprofile-container::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-
+.userpost-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 50px;
+  margin: 0 auto;
+ 
+}

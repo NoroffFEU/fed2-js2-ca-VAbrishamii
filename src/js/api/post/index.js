@@ -86,8 +86,14 @@ export default class PostAPI {
     },
 
     readSinglePost: async (postId) => {
+      const params = new URLSearchParams({
+        _author: true,
+        _comments: true, 
+        _reactions: true, 
+      })
+   
       try {
-        const response = await fetch(`${this.apiReadPosts}/${postId}`, {
+        const response = await fetch(`${this.apiReadPosts}/${postId}?${params}`, {
           method: "GET",
           headers: headers(),
         });
@@ -174,9 +180,13 @@ export default class PostAPI {
       console.log('comment response', response);
       
       if (response.ok) {
+    
         const data = await response.json();
-        console.log("Comment posted successfully:", data);
-        return data;
+        const updatedPost = await this.post.readSinglePost(postId);
+        console.log('updated post', updatedPost);
+        return updatedPost;
+        // console.log("Comment posted successfully:", data);
+        // return data;
       } else {
         const errorData = await response.json();
         throw new Error(
