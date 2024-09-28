@@ -7,7 +7,7 @@ displayLoggedInUser();
 async function fetchPostById(postId) {
   try {
     const post = await postAPI.post.readSinglePost(postId);
-    console.log('Post:', post);
+    // console.log('Post:', post);
     const postContainer = document.getElementById("post-container");
     postContainer.innerHTML = "";
 

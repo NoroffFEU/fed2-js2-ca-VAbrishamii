@@ -14,25 +14,18 @@ const profileUserName = profileAPI.getUserName();
 export async function readPostsByUser(username) {
     try {
       const response = await profileAPI.profile.readPosts(username);
-      console.log("Posts:", response);
+      // console.log("Posts:", response);
       const posts = response || [];
-      console.log('posts by user', posts);
+      // console.log('posts by user', posts);
   
   
       const postContainer = document.querySelector(".dashboard-container");
       postContainer.innerHTML = "";
-
-      // posts.forEach(post => {
-      //   const postElement = createPostHTML(post,profileUserName);
-      //   postContainer.appendChild(postElement);
-      // });
-      
      
         for (const post of posts) {
         const postElement = await createPostHTML(post,profileUserName);
         postContainer.appendChild(postElement);
 
-        // return posts;
 
       };
     } catch (error) {

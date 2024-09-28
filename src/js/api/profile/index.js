@@ -14,7 +14,7 @@ export default class ProfileAPI {
 
   getUserName() {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log('User:', user);
+    // console.log('User:', user);
     return user?.name || null;
   }
 
@@ -54,7 +54,7 @@ export default class ProfileAPI {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('gerProfileDetails', data);
+      // console.log('gerProfileDetails', data);
       return data;
     }
 
@@ -117,7 +117,7 @@ export default class ProfileAPI {
         _reactions: true,
       });
       const url = `${this.getPostsByUserURL(username || this.getUserName())}?${params}`;
-      console.log('url', url);
+      // console.log('url', url);
       const response = await fetch(url, {
         method: "GET",
         headers: headers(),
@@ -125,7 +125,7 @@ export default class ProfileAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log('data from api', data);
+        // console.log('data from api', data);
         return data;
       }
 
@@ -147,7 +147,7 @@ export default class ProfileAPI {
         method: "GET",
         headers: headers(),
       });
-      console.log('profile', response);
+      // console.log('profile', response);
 
       if (response.ok) {
         const { data } = await response.json();
@@ -163,7 +163,7 @@ export default class ProfileAPI {
     follow: async (username) => {
    
       const url = `${this.apiBase}/social/profiles/${username}/follow`;
-      console.log('follow url', url);
+      // console.log('follow url', url);
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),

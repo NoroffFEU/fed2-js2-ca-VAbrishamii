@@ -21,16 +21,16 @@ export default class NoroffAPI {
         body,
       });
 
-      console.log("Response status:", response.status);
+      // console.log("Response status:", response.status);
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log("Response data:", data); //delete later!!
+        // console.log("Response data:", data); 
         const { accessToken: token, ...user } = data;
-        console.log("Access token:", token); //delete later!!
+        // console.log("Access token:", token); 
 
         localStorage.setItem('accessToken', token);
-        console.log('Token:', token);
+        // console.log('Token:', token);
         localStorage.setItem('user', JSON.stringify(user));
         window.location.href = "/post/feed/";
         return data;

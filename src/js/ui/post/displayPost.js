@@ -92,14 +92,12 @@ export async function displayPosts(posts) {
   const feedContainer = document.querySelector(".feed-container");
   feedContainer.innerHTML = "";
 
-  // posts.forEach(async (post) => {
     for (const post of posts) {
     try {
-      const profileUserName = post.author.name; // Extract the profile username from the post
-      const comments = []; // Assuming you're fetching comments separately (if available)
+      const profileUserName = post.author.name; 
+      const comments = []; 
       
-      const postElement = await createPostHTML(post, profileUserName, comments); // Pass post, profileUserName, and comments
-      feedContainer.appendChild(postElement);
+      const postElement = await createPostHTML(post, profileUserName, comments); 
     } catch (error) {
       console.error("Error fetching comments:", error);
     }

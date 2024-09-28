@@ -6,7 +6,7 @@ import { createPostHTML } from "../post/displayPost";
 export async function AllProfiles() {
   try {
     const response = await profileAPI.profile.allProfiles();
-    console.log("responseprofile", response);
+    // console.log("responseprofile", response);
 
     if (response.error) {
       console.error(response.error);
@@ -37,13 +37,13 @@ export async function AllProfiles() {
 export async function displayPostsFromFollowing() {
   try {
     const posts = await profileAPI.profile.getPostsFromFollowing();
-    console.log("Raw API response:", posts);
+    // console.log("Raw API response:", posts);
 
     if (posts.length === 0) {
-      console.log("No posts from followed users");
+      // console.log("No posts from followed users");
       return;
     }else{
-      console.log("posts", posts);
+      // console.log("posts", posts);
     }
 
     const postContainer = document.querySelector(".userpost-container");

@@ -26,9 +26,9 @@ export default class PostAPI {
 
   post = {
     create: async ({ title, body, tags, media }) => {
-      console.log("Creating post with data:", { title, body, tags, media });
+      // console.log("Creating post with data:", { title, body, tags, media });
       const requestBody = JSON.stringify({ title, body, tags, media });
-      console.log("Request body:", requestBody);
+      // console.log("Request body:", requestBody);
 
       try {
         const response = await fetch(this.apiCreatePosts, {
@@ -37,27 +37,27 @@ export default class PostAPI {
           body: requestBody,
         });
 
-        console.log("Response status:", response.status);
-        console.log("Response object:", response);
+        // console.log("Response status:", response.status);
+        // console.log("Response object:", response);
 
         if (response.ok) {
           const data = await response.json();
 
-          console.log("Post creation successful. Response data:", data);
+          // console.log("Post creation successful. Response data:", data);
           return data;
         } else {
-          console.log(
-            "Post creation failed. Response status:",
-            response.status
-          );
+          // console.log(
+          //   "Post creation failed. Response status:",
+          //   response.status
+          // );
           const errorData = await response.json();
-          console.log("Error data:", errorData);
+          // console.log("Error data:", errorData);
           throw new Error(
             errorData.errors[0]?.message || "Could not create post"
           );
         }
       } catch (error) {
-        console.log("Error in post creation:", error.message);
+        // console.log("Error in post creation:", error.message);
         throw error;
       }
     },
@@ -76,10 +76,10 @@ export default class PostAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log("Data:", data);
+        // console.log("Data:", data);
         return data;
       } else {
-        console.log("failed", response.status);
+        // console.log("failed", response.status);
         const errorData = await response.json();
         throw new Error(errorData.errors[0]?.message || "Could not fetch post");
       }
@@ -100,7 +100,7 @@ export default class PostAPI {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Post data:", data);
+          // console.log("Post data:", data);
           return data;
         } else {
           const errorData = await response.json();
@@ -109,7 +109,7 @@ export default class PostAPI {
           );
         }
       } catch (error) {
-        console.error("Error fetching post:", error.message);
+        // console.error("Error fetching post:", error.message);
         throw error;
       }
     },
@@ -129,7 +129,7 @@ export default class PostAPI {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Post updated successfully:", data);
+        // console.log("Post updated successfully:", data);
         return data;
       } else {
         const errorData = await response.json();
@@ -138,7 +138,7 @@ export default class PostAPI {
         );
       }
     } catch (error) {
-      console.error("Error updating post:", error.message);
+      // console.error("Error updating post:", error.message);
       throw error;
     }
   },
@@ -165,7 +165,7 @@ export default class PostAPI {
   
   comment: async (postId, { body: comment }) => {
     const requestBody = JSON.stringify({ body: comment });
-    console.log('comment method', postId, requestBody);
+    // console.log('comment method', postId, requestBody);
     
     try {
       const response = await fetch(
@@ -177,13 +177,13 @@ export default class PostAPI {
         }
       );
       
-      console.log('comment response', response);
+      // console.log('comment response', response);
       
       if (response.ok) {
     
         const data = await response.json();
         const updatedPost = await this.post.readSinglePost(postId);
-        console.log('updated post', updatedPost);
+        // console.log('updated post', updatedPost);
         return updatedPost;
         // console.log("Comment posted successfully:", data);
         // return data;

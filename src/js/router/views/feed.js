@@ -22,7 +22,6 @@ async function fetchAllPosts() {
     const response = await postAPI.post.read();
     const posts = response || [];
 
-    // Implement pagination
     const totalPosts = posts.length;
     const startIndex = (currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
@@ -31,17 +30,11 @@ async function fetchAllPosts() {
     const postContainer = document.querySelector(".feed-container");
     postContainer.innerHTML = ""; 
 
-    // paginatedPosts.forEach(post => {
-    //   const postElement = createPostHTML(post);
-    //   postContainer.appendChild(postElement);
-    // });
 
     for (const post of paginatedPosts) {
       const postElement = await createPostHTML(post);
       postContainer.appendChild(postElement);
     }
-  
-
     handlePagination(totalPosts);
   } catch (error) {
     console.error("Failed to fetch posts:", error);
