@@ -48,11 +48,15 @@ export async function displayPostsFromFollowing() {
 
     const postContainer = document.querySelector(".userpost-container");
     postContainer.innerHTML = "";
-    posts.forEach((post) => {
-      const postElement = createPostHTML(post);
+    for (const post of posts) {
+      const postElement = await createPostHTML(post);
       postContainer.appendChild(postElement);
-      return posts;
-    });
+    }
+    // posts.forEach((post) => {
+    //   const postElement = createPostHTML(post);
+    //   postContainer.appendChild(postElement);
+    //   return posts;
+    // });
   } catch (error) {
     console.error("Error fetching posts:", error.message);
   }

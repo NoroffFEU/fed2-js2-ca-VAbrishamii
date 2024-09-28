@@ -40,7 +40,9 @@ export async function createPostHTML(post, profileUserName, comments = []) {
   }else{
     try {
     const authorContainer = await createAuthorContainer(post);
-    postContainer.appendChild(authorContainer);
+    if (authorContainer instanceof HTMLElement) {
+
+    postContainer.appendChild(authorContainer);}
     } catch (error) {
 
       console.error("Error fetching comments:", error);  
@@ -83,6 +85,9 @@ export async function createPostHTML(post, profileUserName, comments = []) {
 
 
 
+
+
+
 export async function displayPosts(posts) {
   const feedContainer = document.querySelector(".feed-container");
   feedContainer.innerHTML = "";
@@ -101,17 +106,4 @@ export async function displayPosts(posts) {
   };
 }
 
-// export async function displayPosts(posts) {
-//   const feedContainer = document.querySelector(".feed-container");
-//   feedContainer.innerHTML = "";
 
-//   posts.forEach(async (post) => {
-//     try {
-
-//       const postElement = createPostHTML(posts );
-//       feedContainer.appendChild(postElement);
-//     } catch (error) {
-//       console.error("Error fetching comments:", error);
-//     }
-//   });
-// }

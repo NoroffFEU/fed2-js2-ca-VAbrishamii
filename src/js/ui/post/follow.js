@@ -1,10 +1,11 @@
 
 import { profileAPI } from '../../api/instance';
 
-export function createAuthorContainer(post) {
+export async function createAuthorContainer(post) {
   const authorContainer = document.createElement("div");
   authorContainer.classList.add("post-author-container");
 
+if (post.author && post.author.avatar && post.author.avatar.url && post.author.name) {
   const avatarElement = document.createElement("img");
   avatarElement.classList.add("post-author-avatar");
   avatarElement.src = post.author.avatar.url || "default-avatar.png"; 
@@ -56,4 +57,4 @@ export function createAuthorContainer(post) {
 
   return authorContainer;
 }
-
+}
