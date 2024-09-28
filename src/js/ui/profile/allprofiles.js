@@ -52,11 +52,6 @@ export async function displayPostsFromFollowing() {
       const postElement = await createPostHTML(post);
       postContainer.appendChild(postElement);
     }
-    // posts.forEach((post) => {
-    //   const postElement = createPostHTML(post);
-    //   postContainer.appendChild(postElement);
-    //   return posts;
-    // });
   } catch (error) {
     console.error("Error fetching posts:", error.message);
   }
