@@ -1,5 +1,3 @@
-
-
 import { profileAPI } from '../../api/instance';
 
 let followingStatus = {}; 

@@ -9,7 +9,6 @@ function getQueryParam(param) {
 }
 
 const postId = getQueryParam('id');
-// console.log("Post ID:", postId);
 
 if (!postId) {
   alert('No post ID provided.');

@@ -1,8 +1,3 @@
-// import { onLogout } from "../../ui/auth/logout";
-
-// const logoutButton = document.querySelector(".Logout-button");
-// logoutButton.addEventListener("click", onLogout);
-
 import { postAPI } from "../../api/instance";
 import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { createPostHTML } from '../../ui/post/displayPost'; 

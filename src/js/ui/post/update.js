@@ -23,7 +23,6 @@ export function createEditPostForm() {
   const formContainer = document.querySelector('.form-container');
   if (formContainer) {
     formContainer.innerHTML = formHTML;
-    // console.log("Form created successfully!");
   } else {
     console.error("Form container not found.");
   }

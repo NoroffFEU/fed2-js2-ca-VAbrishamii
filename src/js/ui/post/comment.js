@@ -82,13 +82,9 @@ export function createPostInteractions(post, comments) {
           try {
               const newCommentResponse = await postAPI.post.comment(post.id, { body: comment });
               commentTextArea.value = "";
-              console.log('new comment response', newCommentResponse);
-
-            
+         
               const newComment = newCommentResponse.data;
-              console.log('new comment', newComment);
               commentsArray.push(newComment);
-              console.log('Updated commentsArray:', commentsArray);
              
               const newCommentElement = document.createElement("div");
               newCommentElement.classList.add("comment");

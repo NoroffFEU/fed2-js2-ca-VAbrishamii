@@ -9,12 +9,10 @@ export default class ProfileAPI {
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
     this.allprofile = `${this.apiBase}/social/profiles`;
-    // this.postsfromfollowing = `${this.apiBase}/social/posts/following`;
   }
 
   getUserName() {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log('User:', user);
     return user?.name || null;
   }
 
@@ -54,7 +52,6 @@ export default class ProfileAPI {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('getProfileDetails', data);
       return data;
     }
 
@@ -67,11 +64,8 @@ export default class ProfileAPI {
   getFollowedUsers = async () => {
     const loggedInUser = this.getUserName();
     const profileDetails = await this.getProfileDetails(loggedInUser, { following: true });
-    console.log('profileDetails', profileDetails);
     const following = profileDetails.data.following;
-    console.log('following', following);
     const followersNames = following.map((user) => user.name);
-    console.log('followingNames', followersNames);
     return following;
   };
 
@@ -106,7 +100,6 @@ export default class ProfileAPI {
         _reactions: true,
       });
       const url = `${this.getPostsByUserURL(username || this.getUserName())}?${params}`;
-      console.log('url', url);
       const response = await fetch(url, {
         method: "GET",
         headers: headers(),
@@ -136,11 +129,10 @@ export default class ProfileAPI {
         method: "GET",
         headers: headers(),
       });
-      console.log('profile', response);
+      
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log('allprofiles', data);
         return data;
       }
 
@@ -153,7 +145,6 @@ export default class ProfileAPI {
     follow: async (username) => {
    
       const url = `${this.apiBase}/social/profiles/${username}/follow`;
-      console.log('follow url', url);
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),
@@ -174,7 +165,6 @@ export default class ProfileAPI {
     unfollow: async (username) => {
      
       const url = `${this.apiBase}/social/profiles/${username}/unfollow`;
-      console.log('unfollow url', url);
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),
@@ -195,9 +185,7 @@ export default class ProfileAPI {
     getFollowedUsers : async () => {
       const loggedInUser = this.getUserName();
       const profileDetails = await this.getProfileDetails(loggedInUser, { followers: true });
-      console.log('profileDetails', profileDetails);
       const following = profileDetails.data.followers;
-      console.log('following', following);
       return following;
     }
 

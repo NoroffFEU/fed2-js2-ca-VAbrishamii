@@ -14,11 +14,8 @@ const profileUserName = profileAPI.getUserName();
 export async function readPostsByUser(username) {
     try {
       const response = await profileAPI.profile.readPosts(username);
-      // console.log("Posts:", response);
       const posts = response || [];
-      // console.log('posts by user', posts);
-  
-  
+   
       const postContainer = document.querySelector(".dashboard-container");
       postContainer.innerHTML = "";
      
