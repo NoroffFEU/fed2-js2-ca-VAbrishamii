@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feed</title>
+    <title>Feed page</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -15,14 +15,28 @@
   <body>
     <header>
       <nav>
+        <div class="logo">
+          <a href="">
+            <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+          </a>
+        </div>
+
+        <div class="menu">
+          <a href="/post/create/"><i class="fa-solid fa-plus"></i></a>
+        </div>
         <div class="profile-container"></div>
       </nav>
     </header>
-    <main>
-      <h1>Post Page</h1>
-      <p class="User-name"></p>
-      <div id="post-container"></div>
+
+    <main class="feed-page">
+      <h1>Feed</h1>
+      <div class="feed-content">
+        <div class="allprofile-container"></div>
+        <div class="feed-container"></div>
+      </div>
+      <div class="pagination"></div>
     </main>
+
     <footer class="footer">
       <p>&copy; 2024 Noroff</p>
     </footer>

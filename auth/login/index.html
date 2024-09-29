@@ -5,12 +5,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
+    <link rel="stylesheet" href="/src/css/style.css">
     <script type="module" src="/src/app.js"></script>
   </head>
 
   <body>
     <h1>Login</h1>
-    <form name="login">
+    <form name="login" id="loginForm" class="login-form">
       <div>
         <label for="email">Email</label>
         <input id="email" type="email" name="email" required />
@@ -21,8 +22,9 @@
         <input type="password" name="password" id="password" required />
       </div>
 
-      <a href="/auth/register/">Register</a>
-      <button>Login</button>
+      
+      <button id="button" type="submit" class="btn login-btn">Login</button>
+      <button class="btn register-btn"><a href="/auth/register/" >Register</a></button>
     </form>
   </body>
 </html>

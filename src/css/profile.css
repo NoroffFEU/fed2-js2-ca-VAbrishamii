@@ -1,0 +1,159 @@
+.profile-container {
+  display: flex;
+  padding: 20px;
+}
+.profile-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-left: auto;
+}
+.profile {
+  position: relative;
+  display: inline-block;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-name {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 50px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 10px;
+ margin-top: 200px;
+  border-radius: 8px;
+  width: 150px;
+  z-index: 1;
+}
+
+.dropdown-menu.show-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  margin: 10px 0;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+}
+
+.dropdown-menu li a:hover {
+  color: #007bff;
+}
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 50px;
+  margin: 0 auto;
+}
+.post-actions {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  display: flex;
+  gap: 10px;
+  color: #4f4e4e;
+  margin-bottom: 5px;
+}
+
+.allprofile-container {
+  margin: 0 auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 100vh;
+  
+
+}
+.allprofile-header {
+
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+.allprofile-header a {
+  margin: 0 auto;
+}
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+  border: 2px solid #ddd;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+.profile-username {
+  font-size: 10px;
+  margin: 0 auto;
+}
+.profile-bio {
+  font-size: 14px;
+  margin: 5px 0;
+}
+.allprofile-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+.allprofile-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+.allprofile-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+.userpost-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 50px;
+  margin: 0 auto;
+ 
+}
+.update-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 50px;
+  margin: 0 auto;
+  width: 50%;
+}
+#update-profile-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin: 20px auto;
+}

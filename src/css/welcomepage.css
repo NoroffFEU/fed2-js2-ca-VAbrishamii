@@ -1,0 +1,53 @@
+
+.welcome-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
+
+}
+
+.welcome-section {
+  text-align: center;
+  background-color: white;
+  padding: 2rem;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section h1 {
+  font-size: 2.5rem;
+  color: #333;
+  font-family: "courgette", cursive;
+}
+
+.auth-buttons {
+  margin-top: 3rem;
+}
+
+.auth-buttons .btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.login-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.register-btn {
+  background-color: #2631ad;
+  color: white;
+}
+.logout-btn {
+  background-color: #b62f55;
+  color: white;
+}
