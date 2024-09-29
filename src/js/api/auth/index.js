@@ -21,8 +21,6 @@ export default class NoroffAPI {
         body,
       });
 
-      // console.log("Response status:", response.status);
-
       if (response.ok) {
         const { data } = await response.json();
         // console.log("Response data:", data); 

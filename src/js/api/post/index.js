@@ -7,6 +7,7 @@ export default class PostAPI {
   apiReadPosts = "";
   apiUpdatePosts = "";
   apiDeletePosts = "";
+  apiPostFromFollowing = "";
   apiCommentPosts = "";
 
   constructor(apiBase = API_BASE) {
@@ -15,13 +16,8 @@ export default class PostAPI {
     this.apiReadPosts = `${this.apiBase}/social/posts`;
     this.apiUpdatePosts = `${this.apiBase}/social/posts/id`;
     this.apiDeletePosts = `${this.apiBase}/social/posts/id`;
+    this.postsfromfollowing = `${this.apiBase}/social/posts/following`;
     this.apiCommentPosts = `${this.apiBase}/social/posts/id/comment`;
-  } catch (error) {
-    console.error("Error posting comment:", error.message);
-    throw error;
-  } catch (error) {
-    console.error("Error posting comment:", error.message);
-    throw error;
   }
 
   post = {
@@ -79,7 +75,6 @@ export default class PostAPI {
         // console.log("Data:", data);
         return data;
       } else {
-        // console.log("failed", response.status);
         const errorData = await response.json();
         throw new Error(errorData.errors[0]?.message || "Could not fetch post");
       }
@@ -100,7 +95,6 @@ export default class PostAPI {
 
         if (response.ok) {
           const data = await response.json();
-          // console.log("Post data:", data);
           return data;
         } else {
           const errorData = await response.json();
@@ -109,7 +103,6 @@ export default class PostAPI {
           );
         }
       } catch (error) {
-        // console.error("Error fetching post:", error.message);
         throw error;
       }
     },
@@ -129,7 +122,7 @@ export default class PostAPI {
 
       if (response.ok) {
         const data = await response.json();
-        // console.log("Post updated successfully:", data);
+      
         return data;
       } else {
         const errorData = await response.json();
@@ -138,7 +131,6 @@ export default class PostAPI {
         );
       }
     } catch (error) {
-      // console.error("Error updating post:", error.message);
       throw error;
     }
   },
@@ -165,7 +157,7 @@ export default class PostAPI {
   
   comment: async (postId, { body: comment }) => {
     const requestBody = JSON.stringify({ body: comment });
-    // console.log('comment method', postId, requestBody);
+  
     
     try {
       const response = await fetch(
@@ -176,17 +168,14 @@ export default class PostAPI {
           body: requestBody,
         }
       );
-      
-      // console.log('comment response', response);
+    
       
       if (response.ok) {
     
         const data = await response.json();
         const updatedPost = await this.post.readSinglePost(postId);
-        // console.log('updated post', updatedPost);
         return updatedPost;
-        // console.log("Comment posted successfully:", data);
-        // return data;
+     
       } else {
         const errorData = await response.json();
         throw new Error(
@@ -197,9 +186,95 @@ export default class PostAPI {
       console.error("Error posting comment:", error.message);
       throw error;
     }
+  },
+
+  getPostsFromFollowing: async (followedUsers) => {
+    const params = new URLSearchParams({
+      _author: true,
+      _comments: true,
+      _reactions: true,
+    });
+  
+    const url = `${this.postsfromfollowing}?${params}`;
+    console.log('url getpostsfromfollowing', url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: headers(),
+    });
+    if (response.ok) {
+      const { data } = await response.json();
+      return data;
+    }
+    const errorData = await response.json();
+    const errorMessage =
+      errorData.errors[0]?.message || "Could not read posts from following";
+    throw new Error(errorMessage);
   }
   
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "GET",
+  //       headers: headers(),
+  //     });
+  
+  //     const jsonResponse = await response.json(); // Read the response body
+  //     console.log('Full JSON response:', jsonResponse); // This should now be an array of posts
+  
+  //     if (response.ok) {
+  //       // Since jsonResponse is an array of posts, we filter it based on the followed users
+  //       const filteredPosts = jsonResponse.filter(post => {
+  //         // Check if the post's author name is in the list of followed users
+  //         return followedUsers.some(user => user.name === post.data.author.name);
+  //       });
+  
+  //       console.log('Filtered posts:', filteredPosts);
+  //       return filteredPosts;
+  //     } else {
+  //       // Handle error response
+  //       const errorMessage = jsonResponse.errors?.[0]?.message || "Could not read posts from following";
+  //       throw new Error(errorMessage);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching posts from followed users:", error.message);
+  //     throw error;
+  //   }
+  // }
+  
 
-  };
+//   getPostsFromFollowing: async () => {
+//     const params = new URLSearchParams({
+//       _author: true,
+//       _comments: true,
+//       _reactions: true,
+//     });
+  
+//     const url = `${this.postsfromfollowing}?${params}`;
+//     console.log('url getpostsfromfollowing', url);
+  
+//     try {
+//       const response = await fetch(url, {
+//         method: "GET",
+//         headers: headers(),
+//       });
+  
+//       const jsonResponse = await response.json(); 
+//       console.log('Full JSON response:', jsonResponse); 
+//         if (response.ok) {     
+//               const posts = jsonResponse.data?.posts || jsonResponse.posts || jsonResponse; 
+//               return posts;
+//             }
+
+//             const errorData = await response.json();
+//     const errorMessage =
+//       errorData.errors[0]?.message || "Could not read posts from following";
+//     throw new Error(errorMessage);
+//   } catch (error) {
+//     console.error("Error getting posts from following:", error.message);
+//     throw error;
+//   }
+// }
 
 }
+
+  }
+

@@ -9,12 +9,12 @@ export default class ProfileAPI {
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
     this.allprofile = `${this.apiBase}/social/profiles`;
-    this.postsfromfollowing = `${this.apiBase}/social/posts/following`;
+    // this.postsfromfollowing = `${this.apiBase}/social/posts/following`;
   }
 
   getUserName() {
     const user = JSON.parse(localStorage.getItem("user"));
-    // console.log('User:', user);
+    console.log('User:', user);
     return user?.name || null;
   }
 
@@ -54,7 +54,7 @@ export default class ProfileAPI {
 
     if (response.ok) {
       const data = await response.json();
-      // console.log('gerProfileDetails', data);
+      console.log('getProfileDetails', data);
       return data;
     }
 
@@ -64,30 +64,19 @@ export default class ProfileAPI {
     throw new Error(errorMessage);
   };
 
-// async checkIfFollowing(username) {
-//   try {
-//     const loggedInUser = this.getUserName(); 
-//     const url = `${this.apiBase}/social/profiles/${loggedInUser}?_following=true`; // Fetch following details
+  getFollowedUsers = async () => {
+    const loggedInUser = this.getUserName();
+    const profileDetails = await this.getProfileDetails(loggedInUser, { following: true });
+    console.log('profileDetails', profileDetails);
+    const following = profileDetails.data.following;
+    console.log('following', following);
+    const followersNames = following.map((user) => user.name);
+    console.log('followingNames', followersNames);
+    return following;
+  };
 
-//     const response = await fetch(url, {
-//       method: "GET",
-//       headers: headers(), 
-//     });
 
-//     if (response.ok) {
-//       const { data } = await response.json(); 
-//       const followingUsers = data.following.map(user => user.name); 
-//       return followingUsers.includes(username); 
-//     } else {
-//       const errorData = await response.json();
-//       console.error("Error fetching following list:", errorData);
-//       return false;
-//     }
-//   } catch (error) {
-//     console.error("Error in checkIfFollowing function:", error.message);
-//     return false;
-//   }
-// }
+
 
   profile = {
     update: async ({ name }) => {
@@ -117,7 +106,7 @@ export default class ProfileAPI {
         _reactions: true,
       });
       const url = `${this.getPostsByUserURL(username || this.getUserName())}?${params}`;
-      // console.log('url', url);
+      console.log('url', url);
       const response = await fetch(url, {
         method: "GET",
         headers: headers(),
@@ -125,7 +114,7 @@ export default class ProfileAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        // console.log('data from api', data);
+        console.log('data from api', data);
         return data;
       }
 
@@ -147,10 +136,11 @@ export default class ProfileAPI {
         method: "GET",
         headers: headers(),
       });
-      // console.log('profile', response);
+      console.log('profile', response);
 
       if (response.ok) {
         const { data } = await response.json();
+        console.log('allprofiles', data);
         return data;
       }
 
@@ -184,6 +174,7 @@ export default class ProfileAPI {
     unfollow: async (username) => {
      
       const url = `${this.apiBase}/social/profiles/${username}/unfollow`;
+      console.log('unfollow url', url);
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),
@@ -192,6 +183,7 @@ export default class ProfileAPI {
       if (response.ok) {
         const { data } = await response.json();
         return data;
+       
       }
 
       const errorData = await response.json();
@@ -200,30 +192,14 @@ export default class ProfileAPI {
       throw new Error(errorMessage);
     },
 
-    getPostsFromFollowing: async () => {
-      const params = this.createParams({
-        _author: true,
-        _comments: true,
-        _reactions: true,
-      });
-      const url = `${this.postsfromfollowing}?${params}`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: headers(),
-      });
-      console.log('response', response);
-
-      if (response.ok) {
-        const { data } = await response.json();
-        return data;
-      }
-
-      const errorData = await response.json();
-      const errorMessage =
-        errorData.errors[0]?.message || "Could not read posts from following";
-      throw new Error(errorMessage);
-    },
-
+    getFollowedUsers : async () => {
+      const loggedInUser = this.getUserName();
+      const profileDetails = await this.getProfileDetails(loggedInUser, { followers: true });
+      console.log('profileDetails', profileDetails);
+      const following = profileDetails.data.followers;
+      console.log('following', following);
+      return following;
+    }
 
   };
   
