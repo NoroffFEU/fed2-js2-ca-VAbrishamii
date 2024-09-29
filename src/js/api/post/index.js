@@ -61,7 +61,6 @@ export default class PostAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log("Data:", data);
         return data;
       } else {
         const errorData = await response.json();

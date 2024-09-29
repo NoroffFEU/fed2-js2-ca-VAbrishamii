@@ -20,10 +20,8 @@ html, body {
   height: 100%;
 }
 
-/* body {
-  box-sizing: border-box;
-  margin: 0;
-} */
+
+
 a {
   color: #1a171a; 
   text-decoration: none;
@@ -39,7 +37,6 @@ a::after {
   height: 2px;
   bottom: -2px; 
   left: 50%;
-  /* background-color: #c9184a; */
   transition: width 0.3s ease, left 0.3s ease;
 }
 

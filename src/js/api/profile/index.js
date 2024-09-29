@@ -4,11 +4,13 @@ import { headers } from "../headers";
 export default class ProfileAPI {
   apiBase = "";
   allprofile = "";
-  postsfromfollowing = "";
+  updateprofile = "";
+
 
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
     this.allprofile = `${this.apiBase}/social/profiles`;
+    this.updateprofile = `${this.apiBase}/social/profiles/`;
   }
 
   getUserName() {
@@ -73,25 +75,26 @@ export default class ProfileAPI {
 
 
   profile = {
-    update: async ({ name }) => {
-      const body = JSON.stringify({ name });
-      const url = this.getUpdateProfileURL();
+    update: async ({ bio }) => {
+      const username = this.getUserName();
+      const body = JSON.stringify({ bio });
+      const url = `${this.updateprofile}${username}`;
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),
         body,
       });
-
       if (response.ok) {
         const { data } = await response.json();
         return data;
+      
       }
-
       const errorData = await response.json();
       const errorMessage =
         errorData.errors[0]?.message || "Could not update profile";
-      throw new Error(errorMessage);
+        throw new Error(errorMessage);
     },
+    
 
     readPosts: async (username) => {
       const params = this.createParams({

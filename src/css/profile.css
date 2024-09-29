@@ -73,7 +73,6 @@
   margin-bottom: 5px;
 }
 
-/* allusers */
 .allprofile-container {
   margin: 0 auto;
   overflow-y: scroll;
@@ -104,7 +103,6 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  /* margin-right: 15px; */
   margin: 0 auto;
   border: 2px solid #ddd;
 }
@@ -114,7 +112,6 @@
 }
 .profile-username {
   font-size: 10px;
-  /* font-weight: bold; */
   margin: 0 auto;
 }
 .profile-bio {
@@ -142,4 +139,21 @@
   padding: 50px;
   margin: 0 auto;
  
+}
+.update-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 50px;
+  margin: 0 auto;
+  width: 50%;
+}
+#update-profile-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin: 20px auto;
 }

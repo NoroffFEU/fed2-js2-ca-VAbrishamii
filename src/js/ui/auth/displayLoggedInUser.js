@@ -2,7 +2,7 @@
 
 export function displayLoggedInUser() {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+
 
 
   if (user) {
@@ -37,7 +37,7 @@ export function displayLoggedInUser() {
 
     const menuItems = [
       { name: "My Posts", link: `/profile/?user=${user.name}` },
-      { name: "Settings", link: "/profile/update" },
+      { name: "updat", link: "/profile/update/" },
       { name: "Home", link: "/post/feed/" },
       { name: "Logout", link: "#" }
     ];

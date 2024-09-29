@@ -18,6 +18,7 @@ export default defineConfig({
         createPost: resolve(__dirname, "./post/create/index.html"),
         feed: resolve(__dirname, "./post/feed/index.html"),
         followingposts: resolve(__dirname, "./profile/followingposts/index.html"),
+        update: resolve(__dirname, "./profile/update/index.html"),
 
       },
     },
