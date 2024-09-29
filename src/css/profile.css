@@ -28,12 +28,12 @@
 .dropdown-menu {
   display: none;
   position: absolute;
-  right: 0;
+  right: 50px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   list-style: none;
   padding: 10px;
-  margin: 0;
+ margin-top: 200px;
   border-radius: 8px;
   width: 150px;
   z-index: 1;

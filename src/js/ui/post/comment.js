@@ -4,49 +4,45 @@ export function createPostInteractions(post, comments) {
   const interactionsContainer = document.createElement("div");
   interactionsContainer.classList.add("post-interactions");
 
-  // Comments container
   const commentsContainer = document.createElement("div");
   commentsContainer.classList.add("post-comments");
 
   const commentsTitle = document.createElement("div");
   commentsTitle.classList.add("comments-title");
 
-  // Comment icon
+
   const commentIcon = document.createElement("i");
   commentIcon.classList.add("fas", "fa-comments");
   commentIcon.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    toggleCommentForm(post.id);  
+      event.preventDefault();
+      event.stopPropagation();
+      toggleCommentForm(post.id);
   });
   commentsTitle.appendChild(commentIcon);
 
-  // Comment count
   const commentCount = document.createElement("span");
-  commentCount.textContent = ` ${comments.length} `; 
+  commentCount.textContent = ` ${comments.length} `;
   commentsTitle.appendChild(commentCount);
   commentsContainer.appendChild(commentsTitle);
 
-  // Reaction (heart) icon
+
   const reactionIcon = document.createElement("i");
   reactionIcon.classList.add("fas", "fa-heart");
-  
-  // Check if the user has already reacted to the post (use post.reactions or localStorage)
+
+
   const userReactions = JSON.parse(localStorage.getItem("userReactions")) || {};
   if (userReactions[post.id]) {
-    reactionIcon.classList.add("reacted"); // Apply red color if user has reacted
+      reactionIcon.classList.add("reacted");
   }
 
   reactionIcon.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    toggleReaction(post.id, reactionIcon);
+      event.preventDefault();
+      event.stopPropagation();
+      toggleReaction(post.id, reactionIcon);
   });
-  commentsTitle.appendChild(reactionIcon); // Add reaction icon next to comment icon
+  commentsTitle.appendChild(reactionIcon);
 
-  // Displaying existing comments
-  if (comments.length > 0) {
-    comments.forEach((comment) => {
+  comments.forEach((comment) => {
       const commentElement = document.createElement("div");
       commentElement.classList.add("comment");
 
@@ -60,13 +56,11 @@ export function createPostInteractions(post, comments) {
       commentElement.appendChild(commentText);
 
       commentsContainer.appendChild(commentElement);
-    });
-  }
+  });
 
-  // Comment form
   const commentForm = document.createElement("form");
   commentForm.classList.add("comment-form");
-  commentForm.style.display = "none";
+  commentForm.style.display = "none"; 
   commentForm.setAttribute("data-post-id", post.id);
 
   const commentTextArea = document.createElement("textarea");
@@ -77,44 +71,49 @@ export function createPostInteractions(post, comments) {
   const actionIconsContainer = document.createElement("div");
   actionIconsContainer.classList.add("action-icons");
 
-  // Send comment icon
   const sendIcon = document.createElement("i");
   sendIcon.classList.add("fas", "fa-paper-plane", "send-comment");
+
+  let commentsArray = [...comments];
   sendIcon.addEventListener("click", async (event) => {
-    event.preventDefault();
-    const comment = commentTextArea.value.trim();
-    if (comment) {
-      try {
-        const newComment = await postAPI.post.comment(post.id, { body: comment });
-        commentTextArea.value = ""; 
-        commentForm.style.display = "none";  
+      event.preventDefault();
+      const comment = commentTextArea.value.trim();
+      if (comment) {
+          try {
+              const newCommentResponse = await postAPI.post.comment(post.id, { body: comment });
+              commentTextArea.value = "";
+              console.log('new comment response', newCommentResponse);
 
-        // Create and append the new comment element
-        const commentElement = document.createElement("div");
-        commentElement.classList.add("comment");
+            
+              const newComment = newCommentResponse.data;
+              console.log('new comment', newComment);
+              commentsArray.push(newComment);
+              console.log('Updated commentsArray:', commentsArray);
+             
+              const newCommentElement = document.createElement("div");
+              newCommentElement.classList.add("comment");
+              const newOwnerName = document.createElement("strong");
+              newOwnerName.textContent = newComment.comments.owner;
+              newCommentElement.appendChild(newOwnerName);
 
-        const ownerName = document.createElement("strong");
-        ownerName.textContent = newComment.data.comments.owner;  
-        commentElement.appendChild(ownerName);
+              const newCommentText = document.createElement("p");
+              newCommentText.classList.add("post-comment");
+              newCommentText.textContent = newComment.comments.body; 
+              newCommentElement.appendChild(newCommentText);
 
-        const newComments = document.createElement("p");
-        newComments.classList.add("post-comment");
-        newComments.textContent = newComment.data.comments.body;  
-        commentElement.appendChild(newComments);
+              commentsContainer.appendChild(newCommentElement);
 
-        commentsContainer.appendChild(commentElement);
+              const commentCount = commentsContainer.querySelector(".comments-title span");
+              if (commentCount) {
+                  commentCount.textContent = ` ${commentsArray.length} `;
+              }
+           
 
-        // Update the comment count
-        const commentCount = commentsContainer.querySelector(".comments-title span");
-        if (commentCount) {
-          commentCount.textContent = ` ${parseInt(commentCount.textContent) + 1} `;
-        }
-
-      } catch (error) {
-        console.error("Error commenting on post:", error);
-        alert("Could not comment on post. Please try again.");
+          } catch (error) {
+              console.error("Error commenting on post:", error);
+              alert("Could not comment on post. Please try again.");
+          }
       }
-    }
   });
 
   actionIconsContainer.appendChild(sendIcon);
@@ -125,7 +124,7 @@ export function createPostInteractions(post, comments) {
   return interactionsContainer;
 }
 
-// Function to toggle the comment form visibility
+
 function toggleCommentForm(postId) {
   const commentForm = document.querySelector(`.comment-form[data-post-id="${postId}"]`);
   if (commentForm) {
@@ -133,18 +132,17 @@ function toggleCommentForm(postId) {
   }
 }
 
-// Function to toggle the reaction (heart) icon
+
 function toggleReaction(postId, reactionIcon) {
   const userReactions = JSON.parse(localStorage.getItem("userReactions")) || {};
 
   if (userReactions[postId]) {
-    // If the user already reacted, remove the reaction
+  
     delete userReactions[postId];
-    reactionIcon.classList.remove("reacted"); // Remove red color
+    reactionIcon.classList.remove("reacted");
   } else {
-    // If the user has not reacted, add the reaction
     userReactions[postId] = true;
-    reactionIcon.classList.add("reacted"); // Apply red color
+    reactionIcon.classList.add("reacted"); 
   }
 
   localStorage.setItem("userReactions", JSON.stringify(userReactions));

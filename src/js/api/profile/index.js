@@ -153,7 +153,7 @@ export default class ProfileAPI {
     follow: async (username) => {
    
       const url = `${this.apiBase}/social/profiles/${username}/follow`;
-      // console.log('follow url', url);
+      console.log('follow url', url);
       const response = await fetch(url, {
         method: "PUT",
         headers: headers(),

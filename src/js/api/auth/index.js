@@ -23,12 +23,9 @@ export default class NoroffAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        // console.log("Response data:", data); 
         const { accessToken: token, ...user } = data;
-        // console.log("Access token:", token); 
-
+ 
         localStorage.setItem('accessToken', token);
-        // console.log('Token:', token);
         localStorage.setItem('user', JSON.stringify(user));
         window.location.href = "/post/feed/";
         return data;

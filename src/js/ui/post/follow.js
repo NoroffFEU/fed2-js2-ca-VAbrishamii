@@ -1,5 +1,20 @@
 
+
 import { profileAPI } from '../../api/instance';
+
+let followingStatus = {}; 
+function initializeFollowingStatus() {
+  const storedFollowingUsers = JSON.parse(localStorage.getItem("followingUsers")) || {};
+  followingStatus = storedFollowingUsers;
+}
+
+
+function updateFollowButtons(authorName, isFollowing) {
+  const followButtons = document.querySelectorAll(`[data-author-name="${authorName}"]`);
+  followButtons.forEach(button => {
+    button.textContent = isFollowing ? "Unfollow" : "Follow";
+  });
+}
 
 export async function createAuthorContainer(post) {
   const authorContainer = document.createElement("div");
@@ -7,7 +22,7 @@ export async function createAuthorContainer(post) {
 
   const avatarElement = document.createElement("img");
   avatarElement.classList.add("post-author-avatar");
-  avatarElement.src = post.author.avatar.url || "default-avatar.png"; 
+  avatarElement.src = post.author.avatar.url || "default-avatar.png";
   authorContainer.appendChild(avatarElement);
 
   const authorName = document.createElement("span");
@@ -17,31 +32,27 @@ export async function createAuthorContainer(post) {
 
   const followButton = document.createElement("button");
   followButton.classList.add("follow-button");
+  followButton.setAttribute('data-author-name', post.author.name);  
 
-
-  const followingUsers = JSON.parse(localStorage.getItem("followingUsers")) || {};
-  if (followingUsers[post.author.name]) {
-    followButton.textContent = "Unfollow"; 
+  if (followingStatus[post.author.name]) {
+    followButton.textContent = "Unfollow";
   } else {
-    followButton.textContent = "Follow"; 
+    followButton.textContent = "Follow";
   }
 
   followButton.addEventListener('click', async () => {
     try {
       if (followButton.textContent === "Follow") {
-        await profileAPI.profile.follow(post.author.name); 
-        followButton.textContent = "Unfollow"; 
-
-        followingUsers[post.author.name] = true; 
+        await profileAPI.profile.follow(post.author.name);
+        followingStatus[post.author.name] = true;  
+        localStorage.setItem("followingUsers", JSON.stringify(followingStatus));
+        updateFollowButtons(post.author.name, true);  
       } else {
-        await profileAPI.profile.unfollow(post.author.name); 
-        followButton.textContent = "Follow";
-
-    
-        delete followingUsers[post.author.name]; 
+        await profileAPI.profile.unfollow(post.author.name);
+        delete followingStatus[post.author.name];  
+        localStorage.setItem("followingUsers", JSON.stringify(followingStatus));
+        updateFollowButtons(post.author.name, false);  
       }
-
-      localStorage.setItem("followingUsers", JSON.stringify(followingUsers));
     } catch (error) {
       console.error("Error following/unfollowing:", error);
       alert('Could not update follow status. Please try again.');
@@ -52,4 +63,7 @@ export async function createAuthorContainer(post) {
 
   return authorContainer;
 }
+
+
+initializeFollowingStatus();
 

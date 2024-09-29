@@ -72,7 +72,7 @@ export async function createPostHTML(post, profileUserName, comments = []) {
   captionElement.textContent = post.body;
   postContainer.appendChild(captionElement);
 
-  const interactions = createPostInteractions(post, comments, );
+  const interactions = createPostInteractions(post, comments);
   postContainer.appendChild(interactions);
 
   const dateElement = document.createElement("p");
@@ -95,9 +95,11 @@ export async function displayPosts(posts) {
     for (const post of posts) {
     try {
       const profileUserName = post.author.name; 
-      const comments = []; 
+     
+      const comments =  []; 
       
       const postElement = await createPostHTML(post, profileUserName, comments); 
+      feedContainer.appendChild(postElement);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
