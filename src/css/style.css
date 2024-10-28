@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 
+.flex-style{
+    @apply flex justify-center items-center
+}
+
+.btn{
+    @apply p-4 border rounded-lg m-4 w-40 text-center
+}
+
+
 /* @import url(./_reset.css);
 @import url(./navbar.css);
 @import url(./feed.css);
