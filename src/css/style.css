@@ -1,4 +1,9 @@
-@import url(./_reset.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* @import url(./_reset.css);
 @import url(./navbar.css);
 @import url(./feed.css);
 @import url(./profile.css);
@@ -7,7 +12,7 @@
 @import url(./authform.css);
 @import url(./createpost.css);
 @import url(./editpost.css);
-@import url(./userprofile.css);
+@import url(./userprofile.css); */
 
 
 
