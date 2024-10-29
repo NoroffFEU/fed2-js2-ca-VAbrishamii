@@ -4,6 +4,7 @@ export default {
     "./**/*.{html,js,ts}","!./node_modules/**/*"
   ],
   theme: {
+
     extend: {},
   },
   plugins: [],
