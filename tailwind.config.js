@@ -18,7 +18,8 @@ export default {
         text:{
           light:'#E3E4E8',
           dark:'#45494F'
-        }
+        },
+        accent:'#FB9093'
         
 
       }

@@ -1,0 +1,8 @@
+.feed-content{
+    @apply grid grid-cols-[1fr_5fr];
+}
+
+.footer {
+    @apply bg-background-dark text-text-light p-4 text-center w-full mt-8;
+  }
+  

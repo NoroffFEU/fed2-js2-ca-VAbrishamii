@@ -1,0 +1,23 @@
+.btn{
+    @apply p-4 border rounded-lg m-4 w-40 text-center
+  }
+
+.form-container {
+    @apply flex flex-col items-center justify-center min-h-screen bg-gray-100;
+  }
+  
+  .form-box {
+    @apply bg-white p-6 rounded-xl shadow-lg w-full max-w-md;
+  }
+  
+  .form-title {
+    @apply text-2xl font-semibold text-center mb-6 text-text-dark;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-text-dark;
+  }
+
+  
+ 
+  
