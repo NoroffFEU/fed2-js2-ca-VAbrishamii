@@ -1,7 +1,7 @@
 .btn{
     @apply p-4 border rounded-lg m-4 w-40 text-center
   }
-
+/*form*/
 .form-container {
     @apply flex flex-col items-center justify-center min-h-screen bg-gray-100;
   }
@@ -17,6 +17,60 @@
   .input-field {
     @apply w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-text-dark;
   }
+  /*navbar*/
+  .navbar{
+    @apply flex justify-between bg-gradient-to-b from-gray-50 to-gray-400 p-4 rounded-full mx-1 my-0;
+  }
+/*card*/
+/* styles.css */
+
+.post {
+  @apply w-[300px] min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-col flex-grow;
+}
+
+.post:hover {
+  @apply shadow-lg;
+}
+
+.post img {
+  @apply w-full h-[200px] object-cover;
+}
+
+.post p {
+  @apply p-4;
+}
+
+.post h1 {
+  @apply text-lg text-gray-800 my-8 mx-9;
+}
+
+.tag span {
+  @apply text-base text-gray-600 hidden;
+}
+
+.post-caption {
+  @apply flex-grow;
+}
+
+.post-interactions {
+  @apply flex flex-1 pl-2;
+}
+
+.post-comments,
+.post-reactions {
+  @apply flex items-center mt-2;
+}
+
+.comments-title,
+.reactions-title {
+  @apply flex items-center mr-4;
+}
+
+.comments-title i,
+.reactions-title i {
+  @apply mr-1 p-2;
+}
+
 
   
  

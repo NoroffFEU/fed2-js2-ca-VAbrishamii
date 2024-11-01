@@ -19,6 +19,10 @@ export default {
           light:'#E3E4E8',
           dark:'#45494F'
         },
+        blue:{
+          light:'#B2DBF5',
+          dark:'#64B5F6'
+        },
         accent:'#FB9093'
         
 
