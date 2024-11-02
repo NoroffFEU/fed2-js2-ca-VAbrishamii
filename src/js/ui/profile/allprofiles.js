@@ -19,8 +19,8 @@ export async function AllProfiles() {
       const profileElement = document.createElement("div");
       profileElement.classList.add("allprofile");
       profileElement.innerHTML = `
-            <div class="allprofile-header">
-                <img class="profile-avatar" src="${profile.avatar.url}" alt="${profile.name} avatar">
+            <div class="allprofile-header item-center mb-5 p-2 w-2/4">
+                <img class="profile-avatar rounded-full w-20 h-20 items-center" src="${profile.avatar.url}" alt="${profile.name} avatar">
                 <h2 class="profile-username">${profile.name}</h2>
             </div>
         `;
