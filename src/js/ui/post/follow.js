@@ -16,10 +16,10 @@ function updateFollowButtons(authorName, isFollowing) {
 
 export async function createAuthorContainer(post) {
   const authorContainer = document.createElement("div");
-  authorContainer.classList.add("post-author-container");
+  authorContainer.classList.add("post-author-container", 'flex', 'justify-between', 'item-center','px-4', 'py-2');
 
   const avatarElement = document.createElement("img");
-  avatarElement.classList.add("post-author-avatar");
+  avatarElement.classList.add("post-author-avatar", 'w-10', 'h-10', 'rounded-full');
   avatarElement.src = post.author.avatar.url || "default-avatar.png";
   authorContainer.appendChild(avatarElement);
 
@@ -29,7 +29,7 @@ export async function createAuthorContainer(post) {
   authorContainer.appendChild(authorName);
 
   const followButton = document.createElement("button");
-  followButton.classList.add("follow-button");
+  followButton.classList.add("follow-button", 'btn');
   followButton.setAttribute('data-author-name', post.author.name);  
 
   if (followingStatus[post.author.name]) {
