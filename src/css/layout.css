@@ -1,3 +1,11 @@
+ body{
+    @apply bg-background-light
+ }
+ /*navbar*/
+ .navbar{
+    @apply flex justify-between w-11/12 items-center mx-auto bg-slate-50  shadow-md transition-shadow duration-300 ease-in-out p-4 rounded-full my-1;
+  }
+
 .feed-content{
     @apply grid grid-cols-[1fr_5fr];
 }
@@ -5,4 +13,9 @@
 .footer {
     @apply bg-background-dark text-text-light p-4 text-center w-full mt-8;
   }
-  
+  .pagination{
+    @apply mt-5 text-center
+  }
+  .page-button{
+    @apply mx-1 bg-background-dark w-10 h-10 text-center rounded-full pointer-events-auto text-text-light
+  }

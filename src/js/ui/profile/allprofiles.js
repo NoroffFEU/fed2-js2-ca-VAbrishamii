@@ -20,8 +20,8 @@ export async function AllProfiles() {
       profileElement.classList.add("allprofile");
       profileElement.innerHTML = `
             <div class="allprofile-header item-center mb-5 p-2 w-2/4">
-                <img class="profile-avatar rounded-full w-20 h-20 items-center" src="${profile.avatar.url}" alt="${profile.name} avatar">
-                <h2 class="profile-username">${profile.name}</h2>
+                <img class="profile-avatar rounded-full w-20 max-h-10 items-center" src="${profile.avatar.url}" alt="${profile.name} avatar">
+                <h2 class="profile-username text-center">${profile.name}</h2>
             </div>
         `;
 

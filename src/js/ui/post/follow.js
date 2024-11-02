@@ -11,6 +11,13 @@ function updateFollowButtons(authorName, isFollowing) {
   const followButtons = document.querySelectorAll(`[data-author-name="${authorName}"]`);
   followButtons.forEach(button => {
     button.textContent = isFollowing ? "Unfollow" : "Follow";
+    button.classList.remove("bg-secondary-light", "text-text-light", "bg-primary-light", "text-primary-dark");
+    if (isFollowing) {
+      button.classList.add("bg-secondary-light", "text-text-light");
+    }else{
+      button.classList.add('bg-white')
+    }
+  
   });
 }
 
@@ -24,18 +31,20 @@ export async function createAuthorContainer(post) {
   authorContainer.appendChild(avatarElement);
 
   const authorName = document.createElement("span");
-  authorName.classList.add("post-author-name");
+  authorName.classList.add("post-author-name", 'p-4');
   authorName.textContent = post.author.name;
   authorContainer.appendChild(authorName);
 
   const followButton = document.createElement("button");
-  followButton.classList.add("follow-button", 'btn');
+  followButton.classList.add('w-32', 'border', 'rounded-lg', 'text-center');
   followButton.setAttribute('data-author-name', post.author.name);  
 
   if (followingStatus[post.author.name]) {
     followButton.textContent = "Unfollow";
+
   } else {
     followButton.textContent = "Follow";
+
   }
 
   followButton.addEventListener('click', async () => {

@@ -17,15 +17,12 @@
   .input-field {
     @apply w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-text-dark;
   }
-  /*navbar*/
-  .navbar{
-    @apply flex justify-between bg-gradient-to-b from-gray-50 to-gray-400 p-4 rounded-full mx-1 my-0;
-  }
+ 
 
 /*card*/
 
 .post {
-  @apply w-56 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-col flex-grow;
+  @apply w-60 min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-col flex-grow;
 }
 
 .post:hover {
@@ -41,7 +38,7 @@
 }
 
 .post h1 {
-  @apply text-lg text-gray-800 my-8 mx-9;
+  @apply text-lg text-gray-800 my-4 mx-5;
 }
 
 .tag span {
@@ -68,8 +65,9 @@
 
 .comments-title i,
 .reactions-title i {
-  @apply mr-1 p-2;
+  @apply mr-1 p-2 cursor-pointer;
 }
+
 
 
   
