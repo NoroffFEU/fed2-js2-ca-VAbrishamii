@@ -22,7 +22,7 @@
 /*card*/
 
 .post {
-  @apply w-60 min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-col flex-grow;
+  @apply w-64 min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-shrink-0 flex-col flex-grow;
 }
 
 .post:hover {
@@ -30,7 +30,7 @@
 }
 
 .post-image {
-  @apply w-full h-48 object-cover;
+  @apply w-full h-36 object-cover;
 }
 
 .post p {
@@ -38,7 +38,7 @@
 }
 
 .post h1 {
-  @apply text-lg text-gray-800 my-4 mx-5;
+  @apply text-lg text-gray-800 my-1 mx-4;
 }
 
 .tag span {
