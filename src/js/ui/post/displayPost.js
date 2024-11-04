@@ -69,8 +69,33 @@ export async function createPostHTML(post, profileUserName, comments = []) {
 
   const captionElement = document.createElement("p");
   captionElement.classList.add("post-caption");
-  captionElement.textContent = post.body;
+
+  const words = post.body.split(" ");
+  const truncatedCaption = words.slice(0, 8).join(' ');
+  const isTruncated = words.lenght >8;
+  captionElement.textContent = isTruncated ? truncatedCaption + "...": post.body;
+
+  if(isTruncated){
+    const seeMoreText = document.createElement('p');
+    seeMoreText.classList.add('text-blue-500', 'cursor-pointer', 'hover:underline', 'mt-2');
+    seeMoreText.textContent = 'see more';
+
+    seeMoreText.addEventListener('click', ()=>{
+      if (captionElement.textContent.endsWith('...')){
+        captionElement.textContent = post.body;
+        seeMoreText.textContent = 'see less';
+      }else{
+        captionElement.textContent = truncatedCaption + '...';
+        seeMoreText.textContent = 'see more';
+      }
+    })
+ 
+
   postContainer.appendChild(captionElement);
+  postContainer.appendChild(seeMoreText);
+}else{
+  postContainer.appendChild(captionElement);
+}
 
   const interactions = createPostInteractions(post, comments);
   postContainer.appendChild(interactions);
