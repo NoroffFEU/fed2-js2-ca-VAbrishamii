@@ -1,6 +1,6 @@
-import { postAPI } from '../../api/instance';
-import { createPostInteractions } from './comment';
-import { createAuthorContainer } from './follow';
+import { postAPI } from "../../api/instance";
+import { createPostInteractions } from "./comment";
+import { createAuthorContainer } from "./follow";
 
 export async function createPostHTML(post, profileUserName, comments = []) {
   const postContainer = document.createElement("div");
@@ -10,46 +10,44 @@ export async function createPostHTML(post, profileUserName, comments = []) {
   const isOwner = loggedInUser && loggedInUser.name === profileUserName;
 
   if (isOwner) {
-    const actionsContainer = document.createElement('div');
-    actionsContainer.classList.add('post-actions');
-    
-    const editIcon = document.createElement('i');
-    editIcon.classList.add('fas', 'fa-edit');
-    editIcon.addEventListener('click', (event) => {
+    const actionsContainer = document.createElement("div");
+    actionsContainer.classList.add("post-actions");
+
+    const editIcon = document.createElement("i");
+    editIcon.classList.add("fas", "fa-edit");
+    editIcon.addEventListener("click", (event) => {
       event.preventDefault();
-      window.location.href = `/post/edit/?id=${post.id}`; 
+      window.location.href = `/post/edit/?id=${post.id}`;
     });
     actionsContainer.appendChild(editIcon);
-    
-    const deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fas', 'fa-trash');
-    deleteIcon.addEventListener('click', async (event) => {
+
+    const deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fas", "fa-trash");
+    deleteIcon.addEventListener("click", async (event) => {
       event.preventDefault();
-      if (confirm('Are you sure you want to delete this post?')) {
+      if (confirm("Are you sure you want to delete this post?")) {
         try {
           await postAPI.post.delete(post.id);
           location.reload();
         } catch (error) {
           console.error("Error deleting post:", error);
-          alert('Could not delete post. Please try again.');
+          alert("Could not delete post. Please try again.");
         }
       }
     });
     actionsContainer.appendChild(deleteIcon);
     postContainer.appendChild(actionsContainer);
-  }else{
+  } else {
     try {
-    const authorContainer = await createAuthorContainer(post);
-    if (authorContainer instanceof HTMLElement) {
-
-    postContainer.appendChild(authorContainer);}
+      const authorContainer = await createAuthorContainer(post);
+      if (authorContainer instanceof HTMLElement) {
+        postContainer.appendChild(authorContainer);
+      }
     } catch (error) {
-
-      console.error("Error fetching comments:", error);  
-
+      console.error("Error fetching comments:", error);
+    }
   }
-}
- 
+
   const titleElement = document.createElement("h1");
   titleElement.classList.add("post-title");
 
@@ -71,64 +69,65 @@ export async function createPostHTML(post, profileUserName, comments = []) {
   captionElement.classList.add("post-caption");
 
   const words = post.body.split(" ");
-  const truncatedCaption = words.slice(0, 8).join(' ');
-  const isTruncated = words.lenght >8;
-  captionElement.textContent = isTruncated ? truncatedCaption + "...": post.body;
+  const truncatedCaption = words.slice(0, 8).join(" ");
+  const isTruncated = words.lenght > 8;
+  captionElement.textContent = isTruncated
+    ? truncatedCaption + "..."
+    : post.body;
 
-  if(isTruncated){
-    const seeMoreText = document.createElement('p');
-    seeMoreText.classList.add('text-blue-500', 'cursor-pointer', 'hover:underline', 'mt-2');
-    seeMoreText.textContent = 'see more';
+  if (isTruncated) {
+    const seeMoreText = document.createElement("p");
+    seeMoreText.classList.add(
+      "text-blue-500",
+      "cursor-pointer",
+      "hover:underline",
+      "mt-2"
+    );
+    seeMoreText.textContent = "see more";
 
-    seeMoreText.addEventListener('click', ()=>{
-      if (captionElement.textContent.endsWith('...')){
+    seeMoreText.addEventListener("click", () => {
+      if (captionElement.textContent.endsWith("...")) {
         captionElement.textContent = post.body;
-        seeMoreText.textContent = 'see less';
-      }else{
-        captionElement.textContent = truncatedCaption + '...';
-        seeMoreText.textContent = 'see more';
+        seeMoreText.textContent = "see less";
+      } else {
+        captionElement.textContent = truncatedCaption + "...";
+        seeMoreText.textContent = "see more";
       }
-    })
- 
+    });
 
-  postContainer.appendChild(captionElement);
-  postContainer.appendChild(seeMoreText);
-}else{
-  postContainer.appendChild(captionElement);
-}
+    postContainer.appendChild(captionElement);
+    postContainer.appendChild(seeMoreText);
+  } else {
+    postContainer.appendChild(captionElement);
+  }
 
   const interactions = createPostInteractions(post, comments);
   postContainer.appendChild(interactions);
 
   const dateElement = document.createElement("p");
   dateElement.classList.add("post-date");
-  dateElement.textContent = `Published on: ${new Date(post.created).toLocaleDateString()}`;
+  dateElement.textContent = `Published on: ${new Date(
+    post.created
+  ).toLocaleDateString()}`;
   postContainer.appendChild(dateElement);
 
   return postContainer;
 }
 
-
-
-
-
-
 export async function displayPosts(posts) {
   const feedContainer = document.querySelector(".feed-container");
   feedContainer.innerHTML = "";
 
-    for (const post of posts) {
+  for (const post of posts) {
     try {
-      const profileUserName = post.author.name; 
-     
-      const comments =  []; 
-      
-      const postElement = await createPostHTML(post, profileUserName, comments); 
+      const profileUserName = post.author.name;
+
+      const comments = [];
+
+      const postElement = await createPostHTML(post, profileUserName, comments);
       feedContainer.appendChild(postElement);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
-  };
+  }
 }
-
-
