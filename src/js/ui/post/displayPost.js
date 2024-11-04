@@ -2,6 +2,8 @@ import { postAPI } from "../../api/instance";
 import { createPostInteractions } from "./comment";
 import { createAuthorContainer } from "./follow";
 
+console.log("Script loaded in css-frameworks branch");
+
 export async function createPostHTML(post, profileUserName, comments = []) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post");
@@ -70,7 +72,8 @@ export async function createPostHTML(post, profileUserName, comments = []) {
 
   const words = post.body.split(" ");
   const truncatedCaption = words.slice(0, 8).join(" ");
-  const isTruncated = words.lenght > 8;
+  const isTruncated = words.length > 8;
+
   captionElement.textContent = isTruncated
     ? truncatedCaption + "..."
     : post.body;
@@ -80,8 +83,7 @@ export async function createPostHTML(post, profileUserName, comments = []) {
     seeMoreText.classList.add(
       "text-blue-500",
       "cursor-pointer",
-      "hover:underline",
-      "mt-2"
+      "hover:underline"
     );
     seeMoreText.textContent = "see more";
 
