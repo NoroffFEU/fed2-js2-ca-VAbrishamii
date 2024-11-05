@@ -15,7 +15,7 @@ export function displayLoggedInUser() {
 
  
     const userAvatarElement = document.createElement("img");
-    userAvatarElement.classList.add("user-avatar", 'h-10', 'w-10', 'rounded-full', 'border');
+    userAvatarElement.classList.add("user-avatar", 'h-10', 'w-10', 'rounded-full','border','border-gray-200');
     if (user.avatar) {
       userAvatarElement.src = user.avatar.url;
       userAvatarElement.alt = `${user.name}'s avatar`;

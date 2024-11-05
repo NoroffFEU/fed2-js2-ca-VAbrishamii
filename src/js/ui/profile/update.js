@@ -2,15 +2,17 @@ import { profileAPI } from '../../api/instance';
 
 export function createUpdateProfileForm() {
   const formContainer = document.createElement('div');
-  formContainer.classList.add('update-profile-container');
+  formContainer.classList.add('update-profile-container', 'form-container');
 
   const header = document.createElement('h2');
   header.textContent = 'Update Profile';
+  header.classList.add('form-title');
   formContainer.appendChild(header);
 
 
   const form = document.createElement('form');
   form.id = 'update-profile-form';
+  form.classList.add('form-box')
 
   const bioLabel = document.createElement('label');
   bioLabel.setAttribute('for', 'bio');
@@ -20,6 +22,7 @@ export function createUpdateProfileForm() {
   const bioInput = document.createElement('textarea');
   bioInput.id = 'bio';
   bioInput.placeholder = 'Enter your bio...';
+  bioInput.classList.add('input-field');
   form.appendChild(bioInput);
 
   const bannerLabel = document.createElement('label');
@@ -31,6 +34,7 @@ export function createUpdateProfileForm() {
   bannerInput.type = 'text';
   bannerInput.id = 'banner';
   bannerInput.placeholder = 'Enter banner image URL...';
+  bannerInput.classList.add ('input-field');
   form.appendChild(bannerInput);
 
   const avatarLabel = document.createElement('label');
@@ -42,12 +46,14 @@ export function createUpdateProfileForm() {
   avatarInput.type = 'text';
   avatarInput.id = 'avatar';
   avatarInput.placeholder = 'Enter avatar image URL...';
+  avatarInput.classList.add('input-field');
   form.appendChild(avatarInput);
 
 
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
   submitButton.textContent = 'Update Profile';
+  submitButton.classList.add('btn', 'hover:bg-secondary-light', 'hover:text-text-light');
   form.appendChild(submitButton);
 
   formContainer.appendChild(form);

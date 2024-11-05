@@ -2,8 +2,8 @@ import { postAPI } from '../../api/instance';
 
 export function createEditPostForm() {
   const formHTML = `
-    <form id="edit-post-form">
-      <label for="title">Title:</label>
+   <form id="edit-post-form" >
+      <label for="title" class='form-title'>Title:</label>
       <input type="text" id="title" name="title" required>
 
       <label for="caption">Caption:</label>
@@ -18,6 +18,8 @@ export function createEditPostForm() {
       
       <button type="submit">Update Post</button>
     </form>
+   
+    
   `;
 
   const formContainer = document.querySelector('.form-container');

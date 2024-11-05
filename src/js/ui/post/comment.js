@@ -32,13 +32,14 @@ export function createPostInteractions(post, comments) {
 
   const userReactions = JSON.parse(localStorage.getItem("userReactions")) || {};
   if (userReactions[post.id]) {
-      reactionIcon.classList.add("reacted");
+      reactionIcon.classList.add("text-primary");
   }
 
   reactionIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
       toggleReaction(post.id, reactionIcon);
+      reactionIcon.classList.add('text-primary');
   });
   commentsTitle.appendChild(reactionIcon);
 

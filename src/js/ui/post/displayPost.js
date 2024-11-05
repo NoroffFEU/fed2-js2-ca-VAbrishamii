@@ -13,10 +13,10 @@ export async function createPostHTML(post, profileUserName, comments = []) {
 
   if (isOwner) {
     const actionsContainer = document.createElement("div");
-    actionsContainer.classList.add("post-actions");
+    actionsContainer.classList.add("post-actions", 'relative','p-2' );
 
     const editIcon = document.createElement("i");
-    editIcon.classList.add("fas", "fa-edit");
+    editIcon.classList.add("fas", "fa-edit", 'absolute', 'top-2', 'right-8', 'flex', 'hover:text-secondary-light');
     editIcon.addEventListener("click", (event) => {
       event.preventDefault();
       window.location.href = `/post/edit/?id=${post.id}`;
@@ -24,7 +24,7 @@ export async function createPostHTML(post, profileUserName, comments = []) {
     actionsContainer.appendChild(editIcon);
 
     const deleteIcon = document.createElement("i");
-    deleteIcon.classList.add("fas", "fa-trash");
+    deleteIcon.classList.add("fas", "fa-trash",'absolute', 'top-2', 'right-2', 'flex', 'hover:text-secondary-light');
     deleteIcon.addEventListener("click", async (event) => {
       event.preventDefault();
       if (confirm("Are you sure you want to delete this post?")) {

@@ -1,5 +1,5 @@
 .btn{
-    @apply p-4 border rounded-lg m-4 w-40 text-center
+    @apply p-4 border rounded-lg mr-4 w-40 text-center
   }
 /*form*/
 .form-container {
@@ -46,7 +46,7 @@
 }
 
 .post-caption {
-  @apply flex-grow overflow-hidden text-ellipsis;
+  @apply flex-grow overflow-hidden text-ellipsis text-text-dark;
 }
 
 .post-interactions {
@@ -67,7 +67,9 @@
 .reactions-title i {
   @apply mr-1 p-2 cursor-pointer;
 }
-
+.post-date{
+  @apply text-neutral-400
+}
 
 
   
