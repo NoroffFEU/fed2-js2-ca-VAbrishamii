@@ -1,9 +1,11 @@
 import { profileAPI } from '../../api/instance';
 
-let followingStatus = {}; 
-function initializeFollowingStatus() {
+export let followingStatus = {}; 
+export async function initializeFollowingStatus() {
   const storedFollowingUsers = JSON.parse(localStorage.getItem("followingUsers")) || {};
   followingStatus = storedFollowingUsers;
+  console.log('followingstatus', followingStatus);
+  return followingStatus;
 }
 
 

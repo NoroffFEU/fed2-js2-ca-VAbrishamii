@@ -1,6 +1,7 @@
 
 import { postAPI, profileAPI } from "../../api/instance";
 import { createPostHTML } from "../post/displayPost";
+import {  followingStatus,initializeFollowingStatus} from "../post/follow";
 
 
 export async function AllProfiles() {
@@ -33,10 +34,18 @@ export async function AllProfiles() {
 }
 
 
+
 export async function displayPostsFromFollowing() {
+
   try {
-      const posts = await postAPI.post.getPostsFromFollowing();
-   
+    await initializeFollowingStatus();
+    console.log('following statuse', followingStatus);
+    const followedUser = Object.keys(followingStatus);
+    console.log('followeduser', followedUser)
+     
+      const posts = await postAPI.post.getPostsFromFollowing(followedUser);
+      console.log('posts',posts);
+
     const postContainer = document.querySelector(".userpost-container");
     postContainer.innerHTML = "";
 
@@ -52,7 +61,7 @@ export async function displayPostsFromFollowing() {
           unfollowButton.addEventListener("click", async () => {
             try {
               await profileAPI.profile.unfollow(post.id); 
-              removePostsByUser(post.data.author.id);
+              removePostsByUser(post.author.id);
             } catch (error) {
               console.error("Error unfollowing user:", error.message);
             }

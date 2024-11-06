@@ -173,13 +173,13 @@ export default class PostAPI {
     }
   },
 
-  getPostsFromFollowing: async (followedUsers) => {
+  getPostsFromFollowing: async () => {
     const params = new URLSearchParams({
       _author: true,
       _comments: true,
       _reactions: true,
     });
-  
+    
     const url = `${this.postsfromfollowing}?${params}`;
     console.log('url getpostsfromfollowing', url);
     const response = await fetch(url, {
@@ -188,17 +188,22 @@ export default class PostAPI {
     });
     if (response.ok) {
       const { data } = await response.json();
+      console.log('data',data);
+
+
       return data;
+    
     }
     const errorData = await response.json();
     const errorMessage =
       errorData.errors[0]?.message || "Could not read posts from following";
     throw new Error(errorMessage);
   }
+}
   
  
 
 }
 
-  }
+  
 

@@ -5,6 +5,9 @@
  .navbar{
     @apply flex justify-between w-11/12 items-center mx-auto bg-slate-50  shadow-md transition-shadow duration-300 ease-in-out p-4 rounded-full my-1;
   }
+  .logo{
+    @apply w-40 h-10
+  }
 
 .feed-content{
     @apply grid grid-cols-[1fr_5fr];
