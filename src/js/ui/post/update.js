@@ -2,21 +2,21 @@ import { postAPI } from '../../api/instance';
 
 export function createEditPostForm() {
   const formHTML = `
-   <form id="edit-post-form" >
-      <label for="title" class='form-title'>Title:</label>
-      <input type="text" id="title" name="title" required>
+   <form id="edit-post-form" class="form-box" >
+      <label for="title">Title:</label>
+      <input type="text" id="title" class="input-field" name="title" required>
 
       <label for="caption">Caption:</label>
-      <textarea id="caption" name="caption" required></textarea>
+      <textarea id="caption" class="input-field" name="caption" required></textarea>
 
       <label for="tags">Tags:</label>
-      <input type="text" id="tags" name="tags" required>
+      <input type="text" id="tags" class="input-field" name="tags" required>
 
       <label for="image">Image:</label>
-      <input type="text" id="image-url" name="image-url" placeholder="Image URL" required>
-      <img id="image-preview" src="" alt="Image preview" />
+      <input type="text" id="image-url" class="input-field" name="image-url" placeholder="Image URL" required>
+      <img id="image-preview" class="input-field" src="" alt="Image preview" />
       
-      <button type="submit">Update Post</button>
+      <button type="submit" class="btn hover:bg-secondary-light hover:text-text-light">Update Post</button>
     </form>
    
     

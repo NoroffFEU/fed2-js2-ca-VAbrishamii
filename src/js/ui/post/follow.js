@@ -16,8 +16,6 @@ function updateFollowButtons(authorName, isFollowing) {
     button.classList.remove("bg-secondary-light", "text-text-light", "bg-primary-light", "text-primary-dark");
     if (isFollowing) {
       button.classList.add("bg-secondary-light", "text-text-light");
-    }else{
-      button.classList.add('bg-white')
     }
   
   });
@@ -46,6 +44,7 @@ export async function createAuthorContainer(post) {
 
   } else {
     followButton.textContent = "Follow";
+    followButton.classList.add( "text-text-dark", "border-gray-300");
 
   }
 

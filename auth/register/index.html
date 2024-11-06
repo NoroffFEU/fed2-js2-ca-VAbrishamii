@@ -24,7 +24,8 @@
               maxlength="20"
               pattern="^[\w]+$"
               title="Please enter a username using only letters and numbers"
-              class="input-field" />
+              class="input-field"
+              placeholder="Enter your Name" />
           </div>
 
           <div>
@@ -36,7 +37,8 @@
               required
               pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
               title="Please enter a valid noroff.no or stud.noroff.no address"
-              class="input-field" />
+              class="input-field" 
+              placeholder="Email (exp:John@stud.noroff.no)"/>
           </div>
 
           <div>
@@ -47,9 +49,10 @@
               id="password"
               required
               minlength="8"
-              class="input-field" />
+              class="input-field" 
+              placeholder="Password (at least should be 8 character)"/>
           </div>
-          <div class="flex">
+          <div class="flex justify-center">
             <button class="btn hover:bg-secondary-light hover:text-text-light"><a href="/auth/login/">Login</a></button>
             <button class="btn hover:bg-secondary-light hover:text-text-light">Register</button>
           </div>

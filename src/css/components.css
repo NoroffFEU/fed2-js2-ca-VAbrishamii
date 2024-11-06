@@ -3,7 +3,7 @@
   }
 /*form*/
 .form-container {
-    @apply flex flex-col items-center justify-center min-h-screen bg-gray-100;
+    @apply flex flex-col w-full items-center justify-center min-h-screen;
   }
   
   .form-box {
