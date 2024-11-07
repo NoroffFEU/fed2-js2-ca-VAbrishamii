@@ -7,9 +7,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Style the scrollbar */
 ::-webkit-scrollbar {
     width: 8px; /* width of the scrollbar */
+    overflow-y: auto;
   }
   
   /* Background of the scrollbar */

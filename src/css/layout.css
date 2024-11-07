@@ -1,5 +1,5 @@
  body{
-    @apply bg-background-light
+    @apply bg-background-light min-h-screen
  }
  /*navbar*/
  .navbar{
@@ -8,13 +8,15 @@
   .logo{
     @apply w-40 h-10
   }
-
+.main{
+  @apply flex-grow
+}
 .feed-content{
     @apply grid grid-cols-[1fr_5fr];
 }
 
 .footer {
-    @apply bg-background-dark text-text-light p-4 text-center w-full mt-8;
+    @apply bg-background-dark text-text-light p-4 text-center w-full mt-8 bottom-0;
   }
   .pagination{
     @apply mt-5 text-center
