@@ -22,7 +22,7 @@
 /*card*/
 
 .post {
-  @apply w-64 min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-shrink-0 flex-col flex-grow;
+  @apply w-72 min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-shrink-0 flex-col flex-grow;
 }
 
 .post:hover {

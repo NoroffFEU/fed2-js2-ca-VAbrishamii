@@ -2,8 +2,6 @@ import { postAPI } from "../../api/instance";
 import { createPostInteractions } from "./comment";
 import { createAuthorContainer } from "./follow";
 
-console.log("Script loaded in css-frameworks branch");
-
 export async function createPostHTML(post, profileUserName, comments = []) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post");

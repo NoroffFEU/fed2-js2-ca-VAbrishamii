@@ -1,3 +1,6 @@
+import { createAuthorContainer } from "./follow";
+
+
 
 export function createSinglePostHTML(post) {
   const postContainer = document.createElement("div");
