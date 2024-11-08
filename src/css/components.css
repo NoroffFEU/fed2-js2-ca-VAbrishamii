@@ -1,5 +1,5 @@
 .btn{
-    @apply p-4 border rounded-lg mr-4 w-40 text-center
+    @apply p-4 border rounded-lg mr-4 w-36 text-center
   }
 /*form*/
 .form-container {
@@ -26,7 +26,7 @@
 }
 
 .post:hover {
-  @apply shadow-lg;
+  @apply shadow-xl;
 }
 
 .post-image {
