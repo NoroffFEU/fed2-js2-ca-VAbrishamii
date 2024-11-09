@@ -68,7 +68,8 @@ export async function createPostHTML(post, profileUserName, comments = []) {
   const captionElement = document.createElement("p");
   captionElement.classList.add("post-caption");
 
-  const words = post.body.split(" ");
+  const postBody = post.body || "";
+  const words = postBody.split(" ");
   const truncatedCaption = words.slice(0, 8).join(" ");
   const isTruncated = words.length > 8;
 

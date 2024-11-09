@@ -1,7 +1,7 @@
 import { postAPI } from "../../api/instance";
 import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { createPostHTML } from '../../ui/post/displayPost'; 
-import { AllProfiles } from "../../ui/profile/allprofiles";
+// import { AllProfiles } from "../../ui/profile/allprofiles";
 
 
 export function handlePostClick(postId) {
@@ -54,6 +54,6 @@ function handlePagination(totalPosts) {
   }
 }
 
-AllProfiles();
+// AllProfiles();
 displayLoggedInUser();
 fetchAllPosts();
