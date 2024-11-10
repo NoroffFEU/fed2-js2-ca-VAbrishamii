@@ -73,5 +73,62 @@ export async function createAuthorContainer(post) {
 }
 
 
+export async function updateFollowerFollowingCount() {
+  try{
+    const username = profileAPI.getUserName();
+    console.log(username)
+    if(!username){
+      throw new error("user is not logged in");
+    }
+    const profileData = await profileAPI.getProfileDetails(username,{
+      followers:true,
+      following:true,
+      posts:true
+    });
+    console.log('profiledata',profileData);
+
+    const profileInfoContainer = document.getElementById("profile-info");
+    if (!profileInfoContainer) {
+      console.error("Profile info container not found in the DOM");
+      return;
+    }
+    
+    // Clear any existing content inside the container
+    profileInfoContainer.innerHTML = "";
+
+    // Add Tailwind classes to the container for styling
+    profileInfoContainer.classList.add("flex", "gap-4", "text-center", );
+
+    // Helper function to create and append count elements
+    function createCountElement(label, count) {
+      // Create a container for each label and count
+      const countContainer = document.createElement("div");
+      countContainer.classList.add("flex", "flex-col", "items-center");
+
+      const labelElement = document.createElement("p");
+      labelElement.textContent = label;
+      labelElement.classList.add("text-gray-600", "font-semibold", "text-sm");
+
+      const countElement = document.createElement("p");
+      countElement.textContent = count;
+      countElement.classList.add("text-lg", "font-bold", "text-gray-900");
+
+      // Append label and count to the count container, and then to profile info container
+      countContainer.appendChild(labelElement);
+      countContainer.appendChild(countElement);
+      profileInfoContainer.appendChild(countContainer);
+    }
+    // Create and append elements for followers, following, and posts
+    createCountElement("Followers", profileData.data._count.followers);
+    createCountElement("Following", profileData.data._count.following);
+    createCountElement("Posts", profileData.data._count.posts);
+
+  } catch (error) {
+    console.error("Error fetching follower/following counts:", error.message);
+  }
+}
+
+updateFollowerFollowingCount();
+
 initializeFollowingStatus();
 

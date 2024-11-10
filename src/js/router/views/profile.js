@@ -9,6 +9,7 @@ import { createPostHTML } from '../../ui/post/displayPost';
 
 displayLoggedInUser();
 
+
 const profileUserName = profileAPI.getUserName();
 
 export async function readPostsByUser(username) {
@@ -31,5 +32,6 @@ export async function readPostsByUser(username) {
   }
   
   readPostsByUser();
+
 
   
