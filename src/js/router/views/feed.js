@@ -2,7 +2,7 @@ import { postAPI } from "../../api/instance";
 import { displayLoggedInUser } from "../../ui/auth/displayLoggedInUser";
 import { initializeDarkMode, toggleDarkMode } from "../../ui/global/darkmode";
 import { createPostHTML } from '../../ui/post/displayPost'; 
-// import { AllProfiles } from "../../ui/profile/allprofiles";
+
 
 
 export function handlePostClick(postId) {

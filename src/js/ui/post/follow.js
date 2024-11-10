@@ -4,7 +4,6 @@ export let followingStatus = {};
 export async function initializeFollowingStatus() {
   const storedFollowingUsers = JSON.parse(localStorage.getItem("followingUsers")) || {};
   followingStatus = storedFollowingUsers;
-  console.log('followingstatus', followingStatus);
   return followingStatus;
 }
 
@@ -76,7 +75,6 @@ export async function createAuthorContainer(post) {
 export async function updateFollowerFollowingCount() {
   try{
     const username = profileAPI.getUserName();
-    console.log(username)
     if(!username){
       throw new error("user is not logged in");
     }
@@ -85,7 +83,7 @@ export async function updateFollowerFollowingCount() {
       following:true,
       posts:true
     });
-    console.log('profiledata',profileData);
+
 
     const profileInfoContainer = document.getElementById("profile-info");
     if (!profileInfoContainer) {
@@ -93,15 +91,11 @@ export async function updateFollowerFollowingCount() {
       return;
     }
     
-    // Clear any existing content inside the container
     profileInfoContainer.innerHTML = "";
 
-    // Add Tailwind classes to the container for styling
     profileInfoContainer.classList.add("flex", "gap-4", "text-center", );
 
-    // Helper function to create and append count elements
     function createCountElement(label, count) {
-      // Create a container for each label and count
       const countContainer = document.createElement("div");
       countContainer.classList.add("flex", "flex-col", "items-center");
 
@@ -113,12 +107,11 @@ export async function updateFollowerFollowingCount() {
       countElement.textContent = count;
       countElement.classList.add("text-lg", "font-bold", "text-gray-900");
 
-      // Append label and count to the count container, and then to profile info container
       countContainer.appendChild(labelElement);
       countContainer.appendChild(countElement);
       profileInfoContainer.appendChild(countContainer);
     }
-    // Create and append elements for followers, following, and posts
+
     createCountElement("Followers", profileData.data._count.followers);
     createCountElement("Following", profileData.data._count.following);
     createCountElement("Posts", profileData.data._count.posts);
@@ -129,6 +122,5 @@ export async function updateFollowerFollowingCount() {
 }
 
 updateFollowerFollowingCount();
-
 initializeFollowingStatus();
 

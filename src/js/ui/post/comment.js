@@ -74,8 +74,6 @@ export function createPostInteractions(post, comments) {
   commentTextArea.placeholder = "Write your comment...";
   commentForm.appendChild(commentTextArea);
 
-  // const actionIconsContainer = document.createElement("div");
-  // actionIconsContainer.classList.add("action-icons", 'absolute');
 
   const sendIcon = document.createElement("i");
   sendIcon.classList.add("fas", "fa-paper-plane", "send-comment", 'absolute','right-2', 'top-6', 'text-text-dark');
@@ -120,8 +118,6 @@ export function createPostInteractions(post, comments) {
 
 
   commentForm.appendChild(sendIcon);
-  // interactionsContainer.appendChild(commentsContainer);
-  // interactionsContainer.appendChild(commentForm);
   commentsInteractionContainer.appendChild(commentForm);
   commentsContainer.appendChild(commentsInteractionContainer);
   interactionsContainer.appendChild(commentsContainer);
