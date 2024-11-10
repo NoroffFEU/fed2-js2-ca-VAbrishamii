@@ -1,5 +1,5 @@
  body{
-    @apply bg-background-light min-h-screen
+    @apply bg-background-light dark:bg-background-dark min-h-screen
  }
  /*navbar*/
  .navbar{
@@ -16,11 +16,11 @@
 }
 
 .footer {
-    @apply bg-background-dark text-text-light p-4 text-center w-full mt-8 bottom-0;
+    @apply bg-background-dark text-text-light dark:bg-background-light dark:text-text-dark p-4 text-center w-full mt-8 bottom-0;
   }
   .pagination{
     @apply mt-5 text-center
   }
   .page-button{
-    @apply mx-1 bg-background-dark w-10 h-10 text-center rounded-full pointer-events-auto text-text-light
+    @apply mx-1 bg-background-dark dark:bg-background-light dark:text-text-dark w-10 h-10 text-center rounded-full pointer-events-auto text-text-light
   }

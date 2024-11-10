@@ -5,6 +5,7 @@ export default {
     './src/**/*.{js,jsx}',
     "./**/*.{html,js,jxs,ts}","!./node_modules/**/*"
   ],
+  darkMode:'class',
   theme: {
     extend: {
       colors:{
@@ -15,7 +16,8 @@ export default {
         },
         background:{
           light:'#F0F2F5',
-          dark:'#18191A'
+          dark:'#45494F',
+
         },
         text:{
           light:'#E3E4E8',
@@ -25,6 +27,7 @@ export default {
           light:'#B2DBF5',
           dark:'#64B5F6'
         },
+  
         accent:'#FB9093'
         
 

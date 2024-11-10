@@ -1,4 +1,4 @@
-
+import { initializeDarkMode, toggleDarkMode } from "../global/darkmode";
 
 export function displayLoggedInUser() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -63,6 +63,23 @@ export function displayLoggedInUser() {
       dropdownMenu.appendChild(menuItem);
     });
 
+
+    // Add Dark Mode Toggle Option
+    const darkModeToggle = document.createElement("li");
+    const darkModeToggleLink = document.createElement("a");
+    darkModeToggleLink.href = "#";
+    darkModeToggleLink.id = "darkModeToggleLink";
+    darkModeToggleLink.textContent = "Dark Mode";
+    darkModeToggleLink.classList.add('block', 'px-4', 'py-2', 'text-text-dark', 'hover:text-secondary-light');
+    darkModeToggleLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleDarkMode(); 
+    });
+    darkModeToggle.appendChild(darkModeToggleLink);
+    dropdownMenu.appendChild(darkModeToggle);
+
+
+
     profileLink.appendChild(dropdownMenu);
 
     const container = document.querySelector(".profile-container");
@@ -77,6 +94,7 @@ export function displayLoggedInUser() {
     dropdownMenu.addEventListener("click", (e) => {
       e.stopPropagation(); 
     });
+    initializeDarkMode();
   } else {
     window.location.href = "/auth/login/";
   }
