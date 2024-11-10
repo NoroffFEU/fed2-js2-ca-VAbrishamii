@@ -1,0 +1,77 @@
+.btn{
+    @apply p-4 border rounded-lg mr-4 w-36 text-center
+  }
+/*form*/
+.form-container {
+    @apply flex flex-col w-full items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8;
+  }
+  
+  .form-box {
+    @apply bg-white p-6 rounded-xl shadow-lg w-full max-w-md;
+  }
+  
+  .form-title {
+    @apply text-2xl font-semibold text-center mb-6 text-text-dark;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-text-dark;
+  }
+ 
+
+/*card*/
+
+.post {
+  @apply w-72 min-h-[100px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md transition-shadow duration-300 ease-in-out relative flex flex-shrink-0 flex-col flex-grow;
+}
+
+.post:hover {
+  @apply shadow-xl;
+}
+
+.post-image {
+  @apply w-full h-36 object-cover;
+}
+
+.post p {
+  @apply p-4;
+}
+
+.post h1 {
+  @apply text-lg text-gray-800 my-1 mx-4;
+}
+
+.tag span {
+  @apply text-base text-gray-600 hidden;
+}
+
+.post-caption {
+  @apply flex-grow overflow-hidden text-ellipsis text-text-dark;
+}
+
+.post-interactions {
+  @apply flex flex-1 pl-2;
+}
+
+.post-comments,
+.post-reactions {
+  @apply flex items-center mt-2;
+}
+
+.comments-title,
+.reactions-title {
+  @apply flex items-center mr-4;
+}
+
+.comments-title i,
+.reactions-title i {
+  @apply mr-1 p-2 cursor-pointer;
+}
+.post-date{
+  @apply text-neutral-400
+}
+
+
+  
+ 
+  

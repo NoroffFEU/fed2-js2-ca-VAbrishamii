@@ -10,34 +10,40 @@
       integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="/src/css/style.css" />
+    <link href="./dist/style.css" rel="stylesheet" />
     <script type="module" src="/src/app.js"></script>
   </head>
 
   <body>
-    <header>
-      <nav class="nav-container">
-        <div class="logo">
-          <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+    <header></header>
+    <div class="flex-style flex-col h-screen bg-background-light">
+      <main class="border rounded-xl m-24 p-8 bg-white shadow-md">
+        <div class="flex-style flex-col">
+          <img src="/images/noroff-logo.png" alt="Noroff Logo" class="p-8" />
         </div>
-    
-      </nav>
-    </header>
+        <section class="welcome-section">
+          <h1 class="text-center text-xl font-bold">Welcom to Noroff Media</h1>
+        </section>
+        <div class="auth-buttons flex-style flex-col gap-4 mt-4 p-4">
+          <a
+            href="/auth/login/"
+            class="btn hover:bg-secondary-light hover:text-white"
+            >Login</a
+          >
 
-    <main class="welcome-page">
-      <section class="welcome-section">
-        <h1>welcom to Noroff media</h1>
-      </section>
-      <div class="auth-buttons">
-        <a href="/profile/" class="btn profile-btn">My Profile</a>
-        <a href="/auth/login/" class="btn login-btn">Login</a>
-        <a href="/auth/register/" class="btn register-btn">Register</a>
-        <button class="btn logout-btn">Logout</button>
-      </div>
-    </main>
- 
+          <a
+            href="/auth/register/"
+            class="btn hover:bg-secondary-light hover:text-white"
+            >Register</a
+          >
+        </div>
+      </main>
+    </div>
   </body>
 </html>

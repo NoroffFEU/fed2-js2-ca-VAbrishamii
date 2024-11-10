@@ -14,25 +14,24 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav class="navbar">
         <div class="logo">
           <a href="">
-            <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+            <img src="/images/noroff-logo.png" alt="Logo" class="h-10 w-auto" />
           </a>
         </div>
 
         <div class="menu">
-          <a href="/post/create/"><i class="fa-solid fa-plus"></i></a>
+          <a href="/post/create/" class="hover:text-secondary-light"><i class="fa-solid fa-plus text-2xl"></i></a>
         </div>
         <div class="profile-container"></div>
       </nav>
     </header>
 
-    <main class="feed-page">
-      <h1>Feed</h1>
-      <div class="feed-content">
-        <div class="allprofile-container"></div>
-        <div class="feed-container"></div>
+    <main class="feed-page p-4">
+      <div class="feed-content flex justify-center items-center gap-1 w-full">
+        <div class="feed-container grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4  justify-center p-2 mx-auto"></div>
+        
       </div>
       <div class="pagination"></div>
     </main>
@@ -42,3 +41,4 @@
     </footer>
   </body>
 </html>
+

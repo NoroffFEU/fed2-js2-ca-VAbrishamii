@@ -4,22 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Post</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <nav>
-      <div class="profile-container"></div>
-    </nav>
+    <header>
+      <nav class="navbar">
+      
+        <div class="menu">
+          <a href="/post/feed/"><i class="fa-solid fa-house mr-4 hover:text-secondary-light"></i></a>  
+        </div>
+      
+        <div class="profile-container"></div>
+      </nav>
+    </header>
     <main>
-      <div class="create-post-container">
-        <h1>Create Post</h1>
+      <div class="create-post-container form-container">
+        <h1 class="form-title">Create Post</h1>
 
-        <form  class="create-post-form" name="createPost">
-          <input type="text" name="title" placeholder="Title" id="title" />
-          <textarea name="content" placeholder="Content" id="body"></textarea>
-          <input type="text" name="image" id="media" placeholder="URL" alt="" />
-          <input type="text" name="tags" placeholder="Tags" id="tags" />
-          <button >Create Post</button>
+        <form  class="create-post-form form-box" name="createPost">
+          <input type="text" name="title" placeholder="Title" id="title" class="input-field"/>
+          <textarea name="content" placeholder="Content" id="body" class="input-field"></textarea>
+          <input type="text" name="image" id="media" placeholder="URL" alt="" class="input-field"/>
+          <input type="text" name="tags" placeholder="Tags" id="tags" class="input-field" />
+          <button class="btn hover:bg-secondary-light hover:text-text-light">Create Post</button>
         </form>
       </div>
     </main>

@@ -63,13 +63,13 @@ export default class ProfileAPI {
     throw new Error(errorMessage);
   };
 
-  getFollowedUsers = async () => {
-    const loggedInUser = this.getUserName();
-    const profileDetails = await this.getProfileDetails(loggedInUser, { following: true });
-    const following = profileDetails.data.following;
-    const followersNames = following.map((user) => user.name);
-    return following;
-  };
+  // getFollowedUsers = async () => {
+  //   const loggedInUser = this.getUserName();
+  //   const profileDetails = await this.getProfileDetails(loggedInUser, { following: true });
+  //   const following = profileDetails.data.following;
+  //   const followersNames = following.map((user) => user.name);
+  //   return following;
+  // };
 
 
 
@@ -110,7 +110,6 @@ export default class ProfileAPI {
 
       if (response.ok) {
         const { data } = await response.json();
-        console.log('data from api', data);
         return data;
       }
 

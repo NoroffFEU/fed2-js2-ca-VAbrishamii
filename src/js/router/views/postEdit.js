@@ -18,7 +18,7 @@ if (!postId) {
   const form = document.querySelector('#edit-post-form');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    await handleUpdatePost(postId);  // Pass postId to handleUpdatePost for updating the post
+    await handleUpdatePost(postId);  
   });
 }
 

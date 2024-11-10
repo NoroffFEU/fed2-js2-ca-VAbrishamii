@@ -1,4 +1,42 @@
-@import url(./_reset.css);
+
+@import './utilites.css';
+@import './components.css';
+@import './layout.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* width of the scrollbar */
+    overflow-y: auto;
+  }
+  
+  /* Background of the scrollbar */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  /* Scrollbar thumb */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  /* Scrollbar thumb on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+
+
+
+
+
+ /* @import url(./_reset.css);
 @import url(./navbar.css);
 @import url(./feed.css);
 @import url(./profile.css);
@@ -7,7 +45,7 @@
 @import url(./authform.css);
 @import url(./createpost.css);
 @import url(./editpost.css);
-@import url(./userprofile.css);
+@import url(./userprofile.css);  */
 
 
 

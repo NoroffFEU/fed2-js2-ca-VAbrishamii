@@ -13,24 +13,26 @@
     referrerpolicy="no-referrer" />
     <script type="module" src="/src/app.js"></script>
   </head>
-  <body>
+  <body >
     <header>
-      <nav>
+      <nav class="navbar">
         <div class="menu">
-          <a href="/post/feed/"><i class="fa-solid fa-house"></i></a>
-          <a href="/post/create/"><i class="fa-solid fa-plus"></i></a>
+          <a href="/post/feed/"><i class="fa-solid fa-house mr-2 hover:text-secondary-light"></i></a>
+          <a href="/post/create/"><i class="fa-solid fa-plus hover:text-secondary-light"></i></a>
       
         </div>
-        <a href="./followingposts/"><button class="btn">Following Posts</button></a>
+        <div id="profile-info" class="flex-style">
+        </div>
+     
         <div class="profile-container"></div>
       </nav>
     </header>
 
-    <main>
-      <div class="dashboard-container"></div>
-    </main>
-    <footer class="footer">
+    <main class="flex justify-center items-center p-16">
+      <div class="dashboard-container grid xl:grid-cols-4 lg:grid-cols-3 md:grid-col-4 sm-grid-2 place-items-center justify-center gap-4 pt-4  "></div>
+    <footer class="footer fixed">
       <p>&copy; 2024 Noroff</p>
     </footer>
   </body>
 </html>
+

@@ -1,21 +1,20 @@
-
+import { initializeDarkMode, toggleDarkMode } from "../global/darkmode";
 
 export function displayLoggedInUser() {
   const user = JSON.parse(localStorage.getItem("user"));
 
 
-
   if (user) {
 
     const profileLink = document.createElement("a");
-    profileLink.classList.add("profile-link");
+    profileLink.classList.add("profile-link", 'relative');
     profileLink.href = "#";  
     const profileDiv = document.createElement("div");
-    profileDiv.classList.add("profile");
+    profileDiv.classList.add("profile", 'flex', 'items-center', 'space-x-2', );
 
  
     const userAvatarElement = document.createElement("img");
-    userAvatarElement.classList.add("user-avatar");
+    userAvatarElement.classList.add("user-avatar", 'h-10', 'w-10', 'rounded-full','border','border-gray-200');
     if (user.avatar) {
       userAvatarElement.src = user.avatar.url;
       userAvatarElement.alt = `${user.name}'s avatar`;
@@ -23,7 +22,7 @@ export function displayLoggedInUser() {
 
 
     const userNameElement = document.createElement("span");
-    userNameElement.classList.add("user-name");
+    userNameElement.classList.add("user-name",'hidden', 'sm:inline-block','text-text-dark','hover:text-secondary-light', 'text-2xl', 'font-medium', 'font-mono');
     userNameElement.textContent = user.name;
 
     profileDiv.appendChild(userAvatarElement);
@@ -32,12 +31,12 @@ export function displayLoggedInUser() {
 
 
     const dropdownMenu = document.createElement("ul");
-    dropdownMenu.classList.add("dropdown-menu");
+    dropdownMenu.classList.add("dropdown-menu", 'absolute', 'right-0', 'mt-2','w-44','bg-background-light','border','border-gray-200','rounded','shadow-lg', 'hidden','z-50' );
 
 
     const menuItems = [
       { name: "My Posts", link: `/profile/?user=${user.name}` },
-      { name: "updat", link: "/profile/update/" },
+      { name: "Updat", link: "/profile/update/" },
       { name: "Home", link: "/post/feed/" },
       { name: "Logout", link: "#" }
     ];
@@ -47,6 +46,7 @@ export function displayLoggedInUser() {
       const menuLink = document.createElement("a");
       menuLink.href = item.link;
       menuLink.textContent = item.name;
+      menuLink.classList.add('block','px-4', 'py-2', 'text-text-dark','hover:text-secondary-light');
 
 
       if (item.name === "Logout") {
@@ -61,6 +61,23 @@ export function displayLoggedInUser() {
       dropdownMenu.appendChild(menuItem);
     });
 
+
+    // Add Dark Mode Toggle Option
+    const darkModeToggle = document.createElement("li");
+    const darkModeToggleLink = document.createElement("a");
+    darkModeToggleLink.href = "#";
+    darkModeToggleLink.id = "darkModeToggleLink";
+    darkModeToggleLink.textContent = "Dark Mode";
+    darkModeToggleLink.classList.add('block', 'px-4', 'py-2', 'text-text-dark', 'hover:text-secondary-light');
+    darkModeToggleLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleDarkMode(); 
+    });
+    darkModeToggle.appendChild(darkModeToggleLink);
+    dropdownMenu.appendChild(darkModeToggle);
+
+
+
     profileLink.appendChild(dropdownMenu);
 
     const container = document.querySelector(".profile-container");
@@ -70,11 +87,12 @@ export function displayLoggedInUser() {
 
     profileLink.addEventListener("click", (e) => {
       e.preventDefault();
-      dropdownMenu.classList.toggle("show-menu");
+      dropdownMenu.classList.toggle("hidden");
     });
     dropdownMenu.addEventListener("click", (e) => {
       e.stopPropagation(); 
     });
+    initializeDarkMode();
   } else {
     window.location.href = "/auth/login/";
   }

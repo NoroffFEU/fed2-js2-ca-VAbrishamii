@@ -5,7 +5,10 @@ export function createPostInteractions(post, comments) {
   interactionsContainer.classList.add("post-interactions");
 
   const commentsContainer = document.createElement("div");
-  commentsContainer.classList.add("post-comments");
+  commentsContainer.classList.add("post-comments", 'space-y-2');
+
+  const commentsInteractionContainer = document.createElement("div");
+  commentsInteractionContainer.classList.add("flex", "flex-col", "space-y-2");
 
   const commentsTitle = document.createElement("div");
   commentsTitle.classList.add("comments-title");
@@ -25,6 +28,8 @@ export function createPostInteractions(post, comments) {
   commentsTitle.appendChild(commentCount);
   commentsContainer.appendChild(commentsTitle);
 
+  commentsInteractionContainer.appendChild(commentsTitle);
+
 
   const reactionIcon = document.createElement("i");
   reactionIcon.classList.add("fas", "fa-heart");
@@ -32,13 +37,14 @@ export function createPostInteractions(post, comments) {
 
   const userReactions = JSON.parse(localStorage.getItem("userReactions")) || {};
   if (userReactions[post.id]) {
-      reactionIcon.classList.add("reacted");
+      reactionIcon.classList.add("text-primary");
   }
 
   reactionIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
       toggleReaction(post.id, reactionIcon);
+      reactionIcon.classList.add('text-primary');
   });
   commentsTitle.appendChild(reactionIcon);
 
@@ -59,20 +65,18 @@ export function createPostInteractions(post, comments) {
   });
 
   const commentForm = document.createElement("form");
-  commentForm.classList.add("comment-form");
+  commentForm.classList.add("comment-form",'relative','flex','item-center',"space-x-2", "mt-2");
   commentForm.style.display = "none"; 
   commentForm.setAttribute("data-post-id", post.id);
 
   const commentTextArea = document.createElement("textarea");
-  commentTextArea.classList.add("comment-input");
+  commentTextArea.classList.add("comment-input", 'input-field',"focus:outline-none", "focus:ring", "focus:border-blue-500", "pr-10");
   commentTextArea.placeholder = "Write your comment...";
   commentForm.appendChild(commentTextArea);
 
-  const actionIconsContainer = document.createElement("div");
-  actionIconsContainer.classList.add("action-icons");
 
   const sendIcon = document.createElement("i");
-  sendIcon.classList.add("fas", "fa-paper-plane", "send-comment");
+  sendIcon.classList.add("fas", "fa-paper-plane", "send-comment", 'absolute','right-2', 'top-6', 'text-text-dark');
 
   let commentsArray = [...comments];
   sendIcon.addEventListener("click", async (event) => {
@@ -112,10 +116,11 @@ export function createPostInteractions(post, comments) {
       }
   });
 
-  actionIconsContainer.appendChild(sendIcon);
-  commentForm.appendChild(actionIconsContainer);
+
+  commentForm.appendChild(sendIcon);
+  commentsInteractionContainer.appendChild(commentForm);
+  commentsContainer.appendChild(commentsInteractionContainer);
   interactionsContainer.appendChild(commentsContainer);
-  interactionsContainer.appendChild(commentForm);
 
   return interactionsContainer;
 }

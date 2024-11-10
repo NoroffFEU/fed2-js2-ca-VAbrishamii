@@ -1,6 +1,7 @@
 
 import { postAPI, profileAPI } from "../../api/instance";
 import { createPostHTML } from "../post/displayPost";
+import {  followingStatus,initializeFollowingStatus} from "../post/follow";
 
 
 export async function AllProfiles() {
@@ -19,9 +20,9 @@ export async function AllProfiles() {
       const profileElement = document.createElement("div");
       profileElement.classList.add("allprofile");
       profileElement.innerHTML = `
-            <div class="allprofile-header">
-                <img class="profile-avatar" src="${profile.avatar.url}" alt="${profile.name} avatar">
-                <h2 class="profile-username">${profile.name}</h2>
+            <div class="allprofile-header item-center mb-5 p-2 w-2/4">
+                <img class="profile-avatar rounded-full w-20 max-h-10 items-center" src="${profile.avatar.url}" alt="${profile.name} avatar">
+                <h2 class="profile-username text-center">${profile.name}</h2>
             </div>
         `;
 
@@ -33,10 +34,18 @@ export async function AllProfiles() {
 }
 
 
+
 export async function displayPostsFromFollowing() {
+
   try {
-      const posts = await postAPI.post.getPostsFromFollowing();
-   
+    await initializeFollowingStatus();
+    console.log('following statuse', followingStatus);
+    const followedUser = Object.keys(followingStatus);
+    console.log('followeduser', followedUser)
+     
+      const posts = await postAPI.post.getPostsFromFollowing(followedUser);
+      console.log('posts',posts);
+
     const postContainer = document.querySelector(".userpost-container");
     postContainer.innerHTML = "";
 
@@ -52,7 +61,7 @@ export async function displayPostsFromFollowing() {
           unfollowButton.addEventListener("click", async () => {
             try {
               await profileAPI.profile.unfollow(post.id); 
-              removePostsByUser(post.data.author.id);
+              removePostsByUser(post.author.id);
             } catch (error) {
               console.error("Error unfollowing user:", error.message);
             }
